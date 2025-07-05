@@ -1,434 +1,535 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { 
-    Github, Linkedin, Mail, ArrowRight, Menu, X, Code, Eye, Briefcase, User, 
-    MessageSquareText, Award, Paperclip, Star, Building, Users, Phone, GraduationCap,
-    Database, GitBranch, Network, Monitor, BarChart2, ShieldCheck, FileSearch,
-    Send, ChevronRight, MessageCircle
+import {
+    Home, User, Briefcase, MessageSquareText, Mail, Linkedin, Github, Download,
+    ChevronRight, Menu, X, ArrowUp, Plus, Heart, Quote, Star, Code, Database,
+    GitBranch, Network, FileSearch, Monitor, BarChart2, Award, Phone, GraduationCap,
+    UserCircle, Paperclip, Send, Building, Users, ShieldCheck, MessageCircle, FileText
 } from 'lucide-react';
 
-// --- Custom Hook for Typing Effect ---
-const useTypingEffect = (words, typeSpeed = 70, backSpeed = 70, backDelay = 1000) => {
-    const [text, setText] = useState('');
-    const wordIndex = useRef(0);
-    const charIndex = useRef(0);
-    const isDeleting = useRef(false);
-
-    useEffect(() => {
-        if (!words || words.length === 0) return;
-
-        const handleTyping = () => {
-            const currentWord = words[wordIndex.current];
-            
-            if (isDeleting.current) {
-                setText(currentWord.substring(0, charIndex.current - 1));
-                charIndex.current--;
-            } else {
-                setText(currentWord.substring(0, charIndex.current + 1));
-                charIndex.current++;
-            }
-
-            if (!isDeleting.current && charIndex.current === currentWord.length) {
-                setTimeout(() => isDeleting.current = true, backDelay);
-            } else if (isDeleting.current && charIndex.current === 0) {
-                isDeleting.current = false;
-                wordIndex.current = (wordIndex.current + 1) % words.length;
-            }
-        };
-
-        const typingInterval = setInterval(handleTyping, isDeleting.current ? backSpeed : typeSpeed);
-
-        return () => clearInterval(typingInterval);
-    }, [words, typeSpeed, backSpeed, backDelay]);
-
-    return text;
-};
-
-
-// --- Portfolio Configuration Data ---
-const portfolioConfig = {
-    name: "Kharisma Fahrun Nisa'",
-    roles: ["Software Development", "Cybersecurity Enthusiast", "Data Analyst"],
-    githubUrl: "https://github.com/airenmeyy",
-    linkedinUrl: "https://linkedin.com/in/khafhrnsaa",
-    email: "gaharuearn@gmail.com",
-    phone: "+6281239362587",
-    whatsappUrl: "https://wa.me/62882007503321",
-    cvUrl: "https://its.id/m/CVRUNNIE", // Replace with your CV link
-    
-    home: {
-        intro: "A proactive and enthusiastic 4th-semester Information Technology student with a strong interest in software development and cybersecurity.",
-        profileImageUrl: "profile.jpg",
-        quickStats: [
-            { icon: <Briefcase size={24} />, value: "2+ Years", label: "Experience" },
-            { icon: <Code size={24} />, value: "Python", label: "Main Language" },
-            { icon: <Paperclip size={24} />, value: "3+ Projects", label: "Completed" },
-            { icon: <Award size={24} />, value: "2.92 / 4.00", label: "GPA" },
-        ]
+// --- Data untuk Portfolio ---
+// Menambahkan properti 'languages' pada setiap item proyek
+const portfolioItemsData = [
+    // Tech Stack
+    { id: 1, category: 'tech', icon: <Code size={56} className="text-accent"/>, title: 'Python' },
+    { id: 2, category: 'tech', icon: <Code size={56} className="text-accent"/>, title: 'C++' },
+    { id: 3, category: 'tech', icon: <Database size={56} className="text-accent"/>, title: 'MySQL' },
+    { id: 4, category: 'tech', icon: <GitBranch size={56} className="text-accent"/>, title: 'Git & GitHub' },
+    { id: 5, category: 'tech', icon: <Network size={56} className="text-accent"/>, title: 'Nmap' },
+    { id: 6, category: 'tech', icon: <FileSearch size={56} className="text-accent"/>, title: 'Wireshark' },
+    { id: 7, category: 'tech', icon: <Monitor size={56} className="text-accent"/>, title: 'VS Code' },
+    { id: 8, category: 'tech', icon: <BarChart2 size={56} className="text-accent"/>, title: 'Pandas & NumPy' },
+    // Projects
+    {
+        id: 17,
+        category: 'projects',
+        title: 'Warcoff',
+        description: 'Warcoff adalah aplikasi web inovatif untuk warkop digital. Aplikasi ini mempermudah pengelolaan menu, pesanan, dan pembayaran dengan antarmuka yang minimalis dan intuitif, mengoptimalkan alur kerja, mengurangi kesalahan, dan meningkatkan efisiensi layanan.',
+        image: 'warcoff.png',
+        demoLink: 'https://www.youtube.com/watch?v=your-youtube-video-id',
+        languages: ['PHP', 'MySQL', 'JavaScript', 'HTML', 'CSS'] // Bahasa/teknologi yang digunakan
     },
-
-    about: {
-        imageUrl: "profile.jpg",
-        whoAmI: "I am a proactive and enthusiastic Information Technology student, driven by a deep passion for software development and cybersecurity.",
-        myPassion: "My approach combines a rigorous analytical mindset with hands-on technical skills to build efficient and secure digital solutions.",
-        personalInfo: [
-            { icon: <User size={18} />, text: "Kharisma Fahrun Nisa'" },
-            { icon: <Mail size={18} />, text: "gaharuearn@gmail.com" },
-            { icon: <Phone size={18} />, text: "+62 882-0075-03321" },
-            { icon: <GraduationCap size={18} />, text: "Sepuluh Nopember Institute of Technology" },
-            { icon: <Award size={18} />, text: "Awardee of PBSB Scholarship - LPDP RI" },
-        ]
+    {
+        id: 18,
+        category: 'projects',
+        title: 'SayurMart',
+        description: 'Sistem manajemen inventaris berbasis web untuk toko sayuran. Aplikasi ini dirancang untuk mengelola stok, mencatat penjualan, dan memantau persediaan dengan efisien, membantu toko sayuran mengoptimalkan operasional dan mengurangi pemborosan.',
+        image: 'sayurmart.png',
+        demoLink: '#',
+        languages: ['Python', 'Flask', 'SQLite', 'HTML', 'CSS'] // Bahasa/teknologi yang digunakan
     },
-
-    portfolio: {
-        projects: [
-            {
-                title: "Warcoff",
-                description: "Warcoff is an innovative web application for digital coffee shops. It simplifies menu, order, and payment management with a minimalist and intuitive interface, optimizing workflow and enhancing service efficiency.",
-                imageUrl: "warcoff.png",
-                githubUrl: "https://github.com/airenmeyy/warcoff", // Example URL
-                liveUrl: "#",
-                frameworks: ["React", "Node.js", "MySQL"]
-            },
-            {
-                title: "SayurMart",
-                description: "A web-based inventory management system for a vegetable store. This application is designed to efficiently manage stock, record sales, and monitor inventory, helping the store optimize operations and reduce waste.",
-                imageUrl: "sayurmart.png",
-                githubUrl: "https://github.com/airenmeyy/sayurmart", // Example URL
-                liveUrl: "#",
-                frameworks: ["HTML", "CSS", "PHP", "MySQL"]
-            },
-        ],
-        certificates: [
-            { title: 'Halal Product Process Assistance Training', imageUrl: 'sertifikat p3h.png', link: '#' },
-            { title: 'LKMM-TD HMIT V', imageUrl: 'sertifikat lkmm TD.png', link: '#' },
-        ],
-        techStack: [
-            { name: "Python", icon: <Code size={32} /> },
-            { name: "C++", icon: <Code size={32} /> },
-            { name: "MySQL", icon: <Database size={32} /> },
-            { name: "Git & GitHub", icon: <GitBranch size={32} /> },
-            { name: "Nmap", icon: <Network size={32} /> },
-            { name: "Wireshark", icon: <FileSearch size={32} /> },
-            { name: "VS Code", icon: <Monitor size={32} /> },
-            { name: "Pandas & NumPy", icon: <BarChart2 size={32} /> },
-        ]
+    {
+        id: 19,
+        category: 'projects',
+        title: 'Proyek Akan Datang',
+        description: 'Detail untuk proyek inovatif berikutnya akan segera diumumkan. Nantikan pembaruan selanjutnya untuk melihat hasil karya terbaru saya.',
+        image: 'https://placehold.co/600x400/221932/FFFFFF?text=Coming+Soon',
+        demoLink: '#',
+        languages: ['Segera Hadir']
     },
+    // Trainings
+    { id: 15, category: 'trainings', image: 'sertifikat p3h.png', title: 'Halal Product Process Assistance Training', link: '#' },
+    { id: 16, category: 'trainings', image: 'sertifikat lkmm TD.png', title: 'LKMM-TD HMIT V', link: '#' },
+];
 
-    testimonials: [
-        {
-            quote: "Kharisma shows great initiative and strong analytical skills in cybersecurity projects. Her reports are detailed and provide sharp recommendations.",
-            name: "Dr. Budi Rahardjo",
-            role: "Cybersecurity Lecturer",
-            imageUrl: "https://placehold.co/100x100/e2e8f0/0f172a?text=BR"
-        },
-        {
-            quote: "Working with Kharisma on the database project was very efficient. Her schema design was well-structured and greatly helped in development.",
-            name: "Ahmad Zulkifli",
-            role: "Database Project Partner",
-            imageUrl: "https://placehold.co/100x100/e2e8f0/0f172a?text=AZ"
-        }
-    ],
-
-    contactLinks: [
-        { icon: <Github/>, title: "GitHub", subtitle: "Explore my code & projects", url: "https://github.com/airenmeyy" },
-        { icon: <Linkedin/>, title: "LinkedIn", subtitle: "Let's connect professionally", url: "https://linkedin.com/in/khafhrnsaa" },
-        { icon: <Mail/>, title: "Email", subtitle: "Send me an email directly", url: "mailto:gaharuearn@gmail.com" },
-        { icon: <MessageCircle/>, title: "WhatsApp", subtitle: "Chat with me", url: "https://wa.me/62882007503321" }
-    ],
-
-    navLinks: [
-        { name: "Home", href: "#home" },
-        { name: "About", href: "#about" },
-        { name: "Portfolio", href: "#portfolio" },
-        { name: "Testimonials", href: "#testimonials" },
-        { name: "Contact", href: "#contact" }
-    ]
-};
-
-// --- Main Application Component ---
-export default function App() {
+// --- Komponen Header ---
+const Header = ({ activeSection }) => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [activeSection, setActiveSection] = useState("#home");
-    const [activePortfolioFilter, setActivePortfolioFilter] = useState('projects');
-    const sectionRefs = useRef({});
-    const typedText = useTypingEffect(portfolioConfig.roles);
+    const navLinks = [
+        { id: 'home', title: 'Home', icon: <Home size={20}/> },
+        { id: 'about', title: 'About', icon: <User size={20}/> },
+        { id: 'portfolio', title: 'Portfolio', icon: <Briefcase size={20}/> },
+        { id: 'testimonials', title: 'Testimonials', icon: <MessageSquareText size={20}/> },
+        { id: 'contact', title: 'Contact', icon: <Mail size={20}/> },
+    ];
+
+    return (
+        <header className="fixed top-0 left-0 w-full px-4 sm:px-8 md:px-16 py-4 flex justify-between items-center z-50 transition-shadow duration-300 bg-[#221932] shadow-lg">
+            <a href="#home" className="text-2xl font-bold text-white"></a>
+            {/* Desktop Nav */}
+            <nav className="hidden md:flex space-x-2">
+                {navLinks.map(link => (
+                    <a key={link.id} href={`#${link.id}`}
+                       className={`nav-link text-lg font-medium text-gray-300 ${activeSection === link.id ? 'nav-active' : ''}`}>
+                        {link.icon}
+                        <span>{link.title}</span>
+                    </a>
+                ))}
+            </nav>
+
+            {/* Mobile Menu Icon */}
+            <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="md:hidden text-2xl text-white z-[101]">
+                {isMenuOpen ? <X/> : <Menu/>}
+            </button>
+
+            {/* Mobile Nav */}
+            <nav className={`mobile-nav md:hidden flex flex-col space-y-2 text-left ${isMenuOpen ? 'active' : ''}`}>
+                {navLinks.map(link => (
+                    <a key={link.id} href={`#${link.id}`}
+                       onClick={() => setIsMenuOpen(false)}
+                       className={`nav-link text-lg font-medium text-gray-300 ${activeSection === link.id ? 'nav-active' : ''}`}>
+                       {link.icon}
+                       <span>{link.title}</span>
+                    </a>
+                ))}
+            </nav>
+        </header>
+    );
+};
+
+// --- Komponen Home/Hero ---
+const HomeSection = () => {
+    const typedEl = useRef(null);
 
     useEffect(() => {
-        portfolioConfig.navLinks.forEach(link => {
-            sectionRefs.current[link.href] = document.querySelector(link.href);
-        });
+        if (window.Typed) {
+            const typed = new window.Typed(typedEl.current, {
+                strings: ['Software Development', 'Cybersecurity Enthusiast', 'Data Analyst'],
+                typeSpeed: 70,
+                backSpeed: 70,
+                backDelay: 1000,
+                loop: true
+            });
+            return () => {
+                if(typed) typed.destroy();
+            };
+        }
+    }, []);
 
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        setActiveSection(`#${entry.target.id}`);
-                    }
-                });
-            },
-            { rootMargin: "-50% 0px -50% 0px" }
-        );
+    return (
+        <section id="home" className="min-h-screen flex flex-col justify-center px-4 sm:px-8 md:px-16 lg:px-24 pt-24 pb-12">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center w-full">
+                <div className="home-content space-y-4 text-center md:text-left">
+                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight text-white">Hi, I'm Kharisma Fahrun Nisa' 👋</h1>
+                    <h3 className="text-2xl md:text-3xl font-bold text-accent h-8">
+                        <span ref={typedEl}></span>
+                    </h3>
+                    <p className="text-gray-300 max-w-lg mx-auto md:mx-0">
+                        A proactive and enthusiastic 4th-semester Information Technology student with a strong interest in software development and cybersecurity.
+                    </p>
+                    <div className="flex items-center justify-center md:justify-start space-x-4 pt-4">
+                        <span className="font-semibold text-white">Follow me on:</span>
+                        <a href="https://linkedin.com/in/khafhrnsaa" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-[#221932] rounded-full flex items-center justify-center text-white hover:bg-accent transition-all duration-300">
+                            <Linkedin size={20}/>
+                        </a>
+                        <a href="https://github.com/airenmeyy" target="_blank" rel="noopener noreferrer" className="w-10 h-10 bg-[#221932] rounded-full flex items-center justify-center text-white hover:bg-accent transition-all duration-300">
+                           <Github size={20}/>
+                        </a>
+                    </div>
+                    <div className="pt-6 flex flex-wrap gap-4 justify-center md:justify-start">
+                        <a href="#portfolio" className="btn inline-flex items-center gap-2 bg-transparent border-2 border-accent text-accent font-semibold px-6 py-3 rounded-lg hover:bg-accent hover:text-[#060407] transition-colors">
+                            <Briefcase size={20}/> Explore My Project
+                        </a>
+                        <a href="#contact" className="btn inline-flex items-center gap-2 bg-accent text-[#060407] font-semibold px-6 py-3 rounded-lg hover:bg-accent-dark transition-colors btn-shadow">
+                            <Mail size={20}/> Contact Me
+                        </a>
+                    </div>
+                </div>
+                <div className="flex justify-center items-center mt-8 md:mt-0">
+                    <div className="relative w-3/4 md:w-full max-w-sm">
+                        <img src="profile.jpg" alt="Profile" className="rounded-full border-8 border-accent w-full h-auto object-cover aspect-square animate-float" />
+                        <div className="floating-icon absolute top-5 -left-5 w-16 h-16 bg-[#221932] rounded-full flex items-center justify-center shadow-lg" style={{animationDelay: '0.2s'}}>
+                            <Code size={36} style={{color: '#722548'}}/>
+                        </div>
+                        <div className="floating-icon absolute top-1/4 -right-8 w-16 h-16 bg-[#221932] rounded-full flex items-center justify-center shadow-lg" style={{animationDelay: '0.5s'}}>
+                            <Database size={36} style={{color: '#541533'}}/>
+                        </div>
+                        <div className="floating-icon absolute bottom-10 -right-2 w-16 h-16 bg-[#221932] rounded-full flex items-center justify-center shadow-lg" style={{animationDelay: '0.8s'}}>
+                            <ShieldCheck size={36} style={{color: '#775E88'}}/>
+                        </div>
+                            <div className="floating-icon absolute bottom-0 -left-10 w-16 h-16 bg-[#221932] rounded-full flex items-center justify-center shadow-lg" style={{animationDelay: '1s'}}>
+                                <Network size={36} className="text-accent"/>
+                            </div>
+                    </div>
+                </div>
+            </div>
+            <div className="quick-stats-container mt-16 md:mt-24 w-full">
+                <h3 className="text-2xl font-semibold mb-6 flex items-center gap-3 text-white"><BarChart2/>Quick Stats:</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-center">
+                    <div className="stat-item bg-white text-[#060407] p-4 rounded-full flex items-center justify-center gap-3 shadow-lg">
+                        <Briefcase size={30} className="text-accent"/>
+                        <div><h5 className="text-xl font-bold">2+ Years</h5><p className="text-sm">Experience</p></div>
+                    </div>
+                     <div className="stat-item bg-white text-[#060407] p-4 rounded-full flex items-center justify-center gap-3 shadow-lg">
+                        <Code size={30} className="text-accent"/>
+                        <div><h5 className="text-xl font-bold">PHP</h5><p className="text-sm">Main Language</p></div>
+                    </div>
+                     <div className="stat-item bg-white text-[#060407] p-4 rounded-full flex items-center justify-center gap-3 shadow-lg">
+                        <Paperclip size={30} className="text-accent"/>
+                        <div><h5 className="text-xl font-bold">3+ Projects</h5><p className="text-sm">Completed</p></div>
+                    </div>
+                     <div className="stat-item bg-white text-[#060407] p-4 rounded-full flex items-center justify-center gap-3 shadow-lg">
+                        <Award size={30} className="text-accent"/>
+                        <div><h5 className="text-xl font-bold">2.92 / 4.00</h5><p className="text-sm">GPA</p></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+};
 
-        Object.values(sectionRefs.current).forEach(section => {
-            if (section) observer.observe(section);
+
+// --- Komponen About ---
+const AboutSection = () => (
+    <section id="about" className="min-h-screen flex flex-col justify-center bg-[#221932] px-4 sm:px-8 md:px-16 lg:px-24 py-20">
+        <div className="text-center">
+            <h2 className="text-4xl font-bold mb-2 text-white">About <span className="text-accent">Me</span></h2>
+            <p className="text-gray-300 mb-12">Discover my journey, passions, and the story behind my work</p>
+        </div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start w-full">
+            <div className="flex justify-center">
+                <img src="profile.jpg" alt="About Kharisma" className="rounded-lg w-full max-w-sm h-auto object-cover" />
+            </div>
+            <div className="space-y-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="about-reveal bg-[#060407] p-6 rounded-lg">
+                        <h3 className="text-2xl font-bold mb-4 text-accent flex items-center gap-2"><Building size={24}/> Who Am I</h3>
+                        <p className="text-gray-300 leading-relaxed">I am a proactive and enthusiastic Information Technology student, driven by a deep passion for software development and cybersecurity.</p>
+                    </div>
+                    <div className="about-reveal bg-[#060407] p-6 rounded-lg">
+                        <h3 className="text-2xl font-bold mb-4 text-accent flex items-center gap-2"><Star size={24}/> My Passion</h3>
+                        <p className="text-gray-300 leading-relaxed">My approach combines a rigorous analytical mindset with hands-on technical skills to build efficient and secure digital solutions.</p>
+                    </div>
+                </div>
+                <div className="about-reveal bg-[#060407] p-6 rounded-lg">
+                    <h3 className="text-2xl font-bold mb-6 text-accent">Personal Info</h3>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4 text-white">
+                        <div className="flex items-center gap-3"><UserCircle className="text-accent"/><span>Kharisma Fahrun Nisa'</span></div>
+                        <div className="flex items-center gap-3"><Mail className="text-accent"/><span>gaharuearn@gmail.com</span></div>
+                        <div className="flex items-center gap-3"><Phone className="text-accent"/><span>+62 882-0075-03321</span></div>
+                        <div className="flex items-center gap-3"><GraduationCap className="text-accent"/><span>Sepuluh Nopember Institute of Technology</span></div>
+                        <div className="flex items-center gap-3 col-span-full"><Award className="text-accent"/><span>Awardee of PBSB Scholarship - LPDP RI</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+);
+
+
+// --- Komponen Portfolio ---
+const PortfolioSection = () => {
+    const [activeFilter, setActiveFilter] = useState('projects');
+    const filters = ['projects', 'tech', 'trainings'];
+
+    const filteredItems = portfolioItemsData.filter(item => item.category === activeFilter);
+
+    return (
+        <section id="portfolio" className="min-h-screen flex flex-col justify-center items-center px-4 sm:px-8 md:px-16 lg:px-24 py-20">
+            <h2 className="text-4xl font-bold mb-4 text-center text-white">My <span className="text-accent">Portfolio</span></h2>
+            <p className="text-gray-300 mb-12 text-center max-w-2xl">Explore my work, certifications, and the technologies & trainings I've attended — all in one place.</p>
+            
+            <div className="flex flex-wrap justify-center items-center gap-4 mb-12">
+                {filters.map(filter => (
+                    <button key={filter} onClick={() => setActiveFilter(filter)}
+                            className={`filter-btn bg-[#221932] px-4 py-2 rounded-lg font-semibold transition-colors capitalize ${activeFilter === filter ? 'active' : 'text-white'}`}>
+                        {filter}
+                    </button>
+                ))}
+            </div>
+            
+            <div className="w-full max-w-6xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                {filteredItems.map(item => (
+                    <div key={item.id} className="portfolio-item bg-[#221932] rounded-lg transition-transform hover:-translate-y-2"
+                         style={{ gridColumn: (item.category === 'projects' || item.category === 'trainings') ? 'span 2' : 'span 1' }}>
+                        {item.category === 'tech' ? (
+                            <div className="p-6 flex flex-col items-center justify-center space-y-3 h-full">
+                                {item.icon}
+                                <h3 className="font-semibold text-lg text-white">{item.title}</h3>
+                            </div>
+                        ) : item.category === 'projects' ? (
+                            <div className="overflow-hidden group h-full">
+                                <div className="relative h-full flex flex-col">
+                                    {item.image && (
+                                        <img src={item.image} alt={item.title} className="w-full h-48 object-cover transition-transform group-hover:scale-105"/>
+                                    )}
+                                    <div className="p-4 flex flex-col text-center flex-grow">
+                                        <h3 className="text-xl font-bold mb-2 text-white">{item.title}</h3>
+                                        <p className="text-gray-400 text-sm flex-grow mb-4 text-justify">{item.description}</p>
+                                        
+                                        {item.languages && (
+                                            <div className="mt-auto pt-4">
+                                                 <div className="flex flex-wrap justify-center gap-2 mb-4">
+                                                    {item.languages.map((lang, index) => (
+                                                        <span key={index} className="bg-[#060407] text-accent text-xs font-medium px-2.5 py-1 rounded-full border border-accent">
+                                                            {lang}
+                                                        </span>
+                                                    ))}
+                                                </div>
+                                            </div>
+                                        )}
+
+                                        {item.demoLink && (
+                                            <a href={item.demoLink} target="_blank" rel="noopener noreferrer" className="btn inline-flex items-center justify-center gap-2 bg-accent text-[#060407] font-semibold px-4 py-2 rounded-lg hover:bg-accent-dark transition-colors mt-auto">
+                                                Demo <ChevronRight size={16}/>
+                                            </a>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+                        ) : ( // For 'trainings'
+                            <div className="overflow-hidden group h-full">
+                                <div className="relative h-full">
+                                    <img src={item.image} alt={item.title} className="w-full h-full object-cover transition-transform group-hover:scale-105"/>
+                                    <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity p-4 text-center">
+                                        <h4 className="text-white font-bold text-lg">{item.title}</h4>
+                                        <a href={item.link} target="_blank" rel="noopener noreferrer" className="mt-2 text-white text-lg border-2 border-accent bg-accent p-3 rounded-full">
+                                            <Paperclip size={20}/>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                ))}
+            </div>
+        </section>
+    );
+};
+
+// --- Komponen Testimonials ---
+const TestimonialsSection = () => (
+    <section id="testimonials" className="min-h-screen flex flex-col justify-center items-center bg-[#221932] px-4 sm:px-8 md:px-16 lg:px-24 py-20">
+        <div className="text-center w-full max-w-4xl">
+            <h2 className="text-4xl font-bold mb-2 text-white">What People Say</h2>
+            <p className="text-gray-400 mb-12">Voices from clients, collaborators, and friends who have experienced my work.</p>
+            <div className="bg-[#060407] p-6 rounded-lg shadow-lg">
+                <div className="flex justify-between items-center mb-6">
+                    <h3 className="text-2xl font-semibold flex items-center gap-3 text-white"><Users/>Testimonials</h3>
+                    <button className="bg-white text-[#060407] font-semibold px-4 py-2 rounded-lg flex items-center gap-2 hover:bg-gray-200 transition-colors">
+                        <Plus size={20}/> Add Testimonial
+                    </button>
+                </div>
+                <div className="space-y-6">
+                    <div className="border border-gray-700 p-6 rounded-lg text-left">
+                        <Quote className="text-4xl text-accent mb-4 transform -scale-x-100"/>
+                        <p className="text-gray-300 italic mb-4">"Kharisma shows great initiative and strong analytical skills in cybersecurity projects. Her reports are detailed and provide sharp recommendations."</p>
+                        <div className="flex items-center gap-4">
+                            <img src="https://placehold.co/100x100/ededed/060407?text=BR" alt="Dr. Budi Rahardjo" className="w-16 h-16 rounded-full border-2 border-accent"/>
+                            <div>
+                                <h4 className="font-bold text-lg text-accent">Dr. Budi Rahardjo</h4>
+                                <p className="text-sm text-gray-500">Cybersecurity Lecturer</p>
+                            </div>
+                        </div>
+                    </div>
+                     <div className="border border-gray-700 p-6 rounded-lg text-left">
+                        <Quote className="text-4xl text-accent mb-4 transform -scale-x-100"/>
+                        <p className="text-gray-300 italic mb-4">"Working with Kharisma on the database project was very efficient. Her schema design was well-structured and greatly helped in development."</p>
+                        <div className="flex items-center gap-4">
+                            <img src="https://placehold.co/100x100/ededed/060407?text=AZ" alt="Ahmad Zulkifli" className="w-16 h-16 rounded-full border-2 border-accent"/>
+                            <div>
+                                <h4 className="font-bold text-lg text-accent">Ahmad Zulkifli</h4>
+                                <p className="text-sm text-gray-500">Database Project Partner</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+);
+
+// --- Komponen Contact ---
+const ContactSection = ({ onSupportClick }) => (
+    <section id="contact" className="min-h-screen flex flex-col justify-center items-center px-4 sm:px-8 md:px-16 lg:px-24 py-20 bg-[#221932]">
+        <div className="text-center">
+            <h2 className="text-4xl font-bold mb-2 text-white">Contact Me</h2>
+            <p className="text-gray-400 mb-8">Reach out via form, social media, or support platforms.</p>
+            <div className="flex justify-center gap-4 mb-12">
+                <a href="#contact-form" className="btn bg-white text-[#060407] font-semibold px-6 py-3 rounded-lg hover:bg-gray-200 transition-colors flex items-center gap-2">
+                    <Mail size={20}/> Contact Me
+                </a>
+                <button onClick={onSupportClick} className="btn bg-transparent border-2 border-white text-white font-semibold px-6 py-3 rounded-lg hover:bg-white hover:text-[#060407] transition-colors flex items-center gap-2">
+                    <Heart size={20}/> Support Me
+                </button>
+            </div>
+        </div>
+        <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="lg:col-span-1 space-y-8">
+                {/* Contact Cards */}
+                <a href="https://github.com/airenmeyy" target="_blank" rel="noopener noreferrer" className="contact-card bg-[#060407] p-6 rounded-lg flex items-center justify-between transition-transform hover:-translate-y-1">
+                    <div>
+                        <h3 className="text-xl font-bold flex items-center gap-3 text-white"><Github/> GitHub</h3>
+                        <p className="text-gray-400">Explore my code & projects</p>
+                    </div>
+                    <ChevronRight className="text-white"/>
+                </a>
+                 <a href="https://linkedin.com/in/khafhrnsaa" target="_blank" rel="noopener noreferrer" className="contact-card bg-[#060407] p-6 rounded-lg flex items-center justify-between transition-transform hover:-translate-y-1">
+                    <div>
+                        <h3 className="text-xl font-bold flex items-center gap-3 text-white"><Linkedin/> LinkedIn</h3>
+                        <p className="text-gray-400">Let's connect professionally</p>
+                    </div>
+                    <ChevronRight className="text-white"/>
+                </a>
+                <a href="mailto:gaharuearn@gmail.com" className="contact-card bg-[#060407] p-6 rounded-lg flex items-center justify-between transition-transform hover:-translate-y-1">
+                    <div>
+                        <h3 className="text-xl font-bold flex items-center gap-3 text-white"><Mail/> Email</h3>
+                        <p className="text-gray-400">Send me an email directly</p>
+                    </div>
+                    <ChevronRight className="text-white"/>
+                </a>
+                <a href="https://wa.me/62882007503321" target="_blank" rel="noopener noreferrer" className="contact-card bg-[#060407] p-6 rounded-lg flex items-center justify-between transition-transform hover:-translate-y-1">
+                    <div>
+                        <h3 className="text-xl font-bold flex items-center gap-3 text-white"><MessageCircle/> WhatsApp</h3>
+                        <p className="text-gray-400">Chat with me</p>
+                    </div>
+                    <ChevronRight className="text-white"/>
+                </a>
+            </div>
+            <div id="contact-form" className="lg:col-span-2 bg-[#060407] p-8 rounded-lg">
+                <h3 className="text-2xl font-bold mb-6 flex items-center gap-3 text-white"><Send/> Send Me a Message</h3>
+                <form action="#" className="space-y-6">
+                    <input type="text" placeholder="Your Name" className="w-full p-3 bg-[#221932] rounded-lg border border-transparent focus:border-accent focus:outline-none text-white"/>
+                    <input type="email" placeholder="Your Email" className="w-full p-3 bg-[#221932] rounded-lg border border-transparent focus:border-accent focus:outline-none text-white"/>
+                    <textarea placeholder="Your Message" rows="5" className="w-full p-3 bg-[#221932] rounded-lg border border-transparent focus:border-accent focus:outline-none text-white"></textarea>
+                    <div className="text-right">
+                        <button type="submit" className="btn bg-accent text-[#060407] font-semibold px-8 py-3 rounded-lg hover:bg-accent-dark transition-colors btn-shadow">Send Message</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+);
+
+// --- Komponen Footer ---
+const Footer = () => (
+    <footer className="bg-[#221932] text-center p-6 text-gray-400">
+        <p>Created by Kharisma Fahrun Nisa' | &copy; {new Date().getFullYear()} All Rights Reserved.</p>
+        <div className="flex justify-center space-x-4 mt-4">
+            <a href="https://linkedin.com/in/khafhrnsaa" target="_blank" rel="noopener noreferrer" className="w-8 h-8 border-2 border-accent rounded-full flex items-center justify-center text-accent hover:bg-accent hover:text-[#060407] transition-all duration-300"><Linkedin size={16}/></a>
+            <a href="https://github.com/khafhrnsaa" target="_blank" rel="noopener noreferrer" className="w-8 h-8 border-2 border-accent rounded-full flex items-center justify-center text-accent hover:bg-accent hover:text-[#060407] transition-all duration-300"><Github size={16}/></a>
+        </div>
+    </footer>
+);
+
+// --- Komponen Support Modal ---
+const SupportModal = ({ isOpen, onClose }) => {
+    if (!isOpen) return null;
+
+    return (
+        <div className="modal-backdrop fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-[100]" onClick={onClose}>
+            <div className="modal-content bg-[#221932] p-8 rounded-lg shadow-2xl w-full max-w-sm text-center relative" onClick={e => e.stopPropagation()}>
+                <button onClick={onClose} className="absolute top-4 right-4 text-gray-400 hover:text-white text-3xl">&times;</button>
+                <h2 className="text-3xl font-bold mb-4 text-white">Support My Work</h2>
+                <p className="text-gray-300 mb-6">If you find my work valuable, consider supporting me. Thank you! 🙏</p>
+                <div className="bg-white p-4 rounded-lg">
+                    <img src="https://placehold.co/300x300/ffffff/060407?text=Your+QRIS+Code+Here" alt="QRIS Code" className="w-full h-auto object-cover rounded-md"/>
+                </div>
+                <p className="text-sm text-gray-400 mt-4">Scan the QR code with your mobile banking or e-wallet app.</p>
+            </div>
+        </div>
+    );
+};
+
+// --- Komponen BackToTop ---
+const BackToTopButton = ({ isVisible }) => (
+    <a href="#home" className={`fixed bottom-8 right-8 w-12 h-12 bg-accent rounded-full flex items-center justify-center text-[#060407] text-2xl transition-all duration-500 hover:bg-accent-dark btn-shadow ${isVisible ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
+        <ArrowUp/>
+    </a>
+);
+
+
+// --- Komponen Utama App ---
+export default function App() {
+    const [activeSection, setActiveSection] = useState('home');
+    const [isBackToTopVisible, setIsBackToTopVisible] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [scriptsLoaded, setScriptsLoaded] = useState(false);
+
+    useEffect(() => {
+        const loadScript = (src, onLoad) => {
+            const script = document.createElement('script');
+            script.src = src;
+            script.async = true;
+            script.onload = onLoad;
+            document.body.appendChild(script);
+            return script;
+        };
+        
+        const scrollRevealScript = loadScript('https://unpkg.com/scrollreveal', () => {
+            loadScript('https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js', () => {
+                setScriptsLoaded(true); 
+            });
         });
 
         return () => {
-            Object.values(sectionRefs.current).forEach(section => {
-                if (section) observer.unobserve(section);
-            });
-        };
-    }, []);
-    
-    const handleLinkClick = () => {
-        if (isMenuOpen) setIsMenuOpen(false);
-    };
-
-    const renderPortfolioContent = () => {
-        switch (activePortfolioFilter) {
-            case 'projects':
-                return (
-                    <div className="grid md:grid-cols-2 gap-8 w-full">
-                        {portfolioConfig.portfolio.projects.map(project => (
-                            <div key={project.title} className="bg-[#1e293b] rounded-lg overflow-hidden group border border-gray-700 transition-all duration-300 hover:border-cyan-400 hover:shadow-2xl hover:shadow-cyan-500/20">
-                                <div className="overflow-hidden"><img src={project.imageUrl} alt={project.title} className="w-full h-56 object-cover transition-transform duration-500 group-hover:scale-110" /></div>
-                                <div className="p-6 flex flex-col h-full">
-                                    <h3 className="text-2xl font-bold text-white mb-2">{project.title}</h3>
-                                    <p className="text-gray-400 mb-4 flex-grow">{project.description}</p>
-                                    <div className="mb-4">
-                                        <h4 className="text-sm font-semibold text-gray-300 mb-2">Frameworks & Technologies:</h4>
-                                        <div className="flex flex-wrap gap-2">
-                                            {project.frameworks.map(fw => <span key={fw} className="bg-gray-700 text-cyan-300 text-xs font-medium px-2.5 py-1 rounded-full">{fw}</span>)}
-                                        </div>
-                                    </div>
-                                    <div className="flex items-center space-x-4 mt-auto pt-4 border-t border-gray-700/50">
-                                        <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="flex items-center px-4 py-2 bg-gray-700 text-white rounded-md hover:bg-gray-600 transition-colors duration-300"><Github size={20} className="mr-2" />GitHub</a>
-                                        <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="flex items-center px-4 py-2 bg-cyan-500 text-black font-bold rounded-md hover:bg-cyan-400 transition-colors duration-300"><Eye size={20} className="mr-2" />Live Demo</a>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                );
-            case 'certificates':
-                return (
-                    <div className="grid md:grid-cols-2 gap-8 w-full">
-                        {portfolioConfig.portfolio.certificates.map(cert => (
-                            <a href={cert.link} target="_blank" rel="noopener noreferrer" key={cert.title} className="block bg-[#1e293b] rounded-lg overflow-hidden group border border-gray-700 transition-all duration-300 hover:border-cyan-400 hover:shadow-2xl hover:shadow-cyan-500/20 relative">
-                                <img src={cert.imageUrl} alt={cert.title} className="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-110" />
-                                <div className="absolute inset-0 bg-black/70 flex items-center justify-center p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                                    <h3 className="text-xl font-bold text-white text-center">{cert.title}</h3>
-                                </div>
-                            </a>
-                        ))}
-                    </div>
-                );
-            case 'tech stack':
-                 return (
-                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8 max-w-4xl mx-auto w-full">
-                        {portfolioConfig.portfolio.techStack.map(skill => (
-                            <div key={skill.name} className="flex flex-col items-center p-6 bg-[#1e293b] rounded-lg border border-gray-700 hover:border-cyan-400 hover:bg-gray-800 transition-all duration-300 transform hover:-translate-y-2">
-                                <div className="text-cyan-400 mb-3">{skill.icon}</div>
-                                <h3 className="text-lg font-semibold text-white text-center">{skill.name}</h3>
-                            </div>
-                        ))}
-                    </div>
-                );
-            default:
-                return null;
+            document.querySelectorAll('script[src^="https://unpkg.com"]').forEach(s => s.remove());
         }
-    };
+    }, []);
+
+    useEffect(() => {
+        if (!scriptsLoaded) return;
+
+        const ScrollReveal = window.ScrollReveal;
+        if (ScrollReveal) {
+            const sr = ScrollReveal({
+                distance: '60px',
+                duration: 1500,
+                reset: false 
+            });
+            sr.reveal('.home-content, .heading', { origin: 'top' });
+            sr.reveal('.quick-stats-container, #testimonials, .contact-card, form', { origin: 'bottom', interval: 100 });
+            sr.reveal('.about-reveal', { origin: 'left', interval: 200 });
+            sr.reveal('.portfolio-item', { origin: 'bottom', interval: 100, cleanup: true });
+        }
+
+        const handleScroll = () => {
+            const sections = document.querySelectorAll('section');
+            let current = 'home';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (window.scrollY >= sectionTop - 150) {
+                    current = section.getAttribute('id');
+                }
+            });
+            setActiveSection(current);
+            setIsBackToTopVisible(window.scrollY > 300);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [scriptsLoaded]);
+
+    if (!scriptsLoaded) {
+        return (
+            <div className="flex justify-center items-center min-h-screen bg-[#060407] text-white text-xl font-semibold">
+                Loading Portfolio...
+            </div>
+        );
+    }
 
     return (
-        <div className="bg-[#0f172a] text-gray-200 font-sans leading-relaxed selection:bg-cyan-400 selection:text-black">
-            {/* --- Header --- */}
-            <header className="fixed top-0 left-0 right-0 z-50 bg-[#0f172a]/80 backdrop-blur-sm">
-                <div className="container mx-auto px-6 py-4 flex justify-between items-center">
-                    <a href="#home" className="text-2xl font-bold text-white"> <span className="text-cyan-400"> </span></a>
-                    <nav className="hidden md:flex items-center space-x-8">
-                        {portfolioConfig.navLinks.map(link => (
-                            <a key={link.name} href={link.href} className={`text-lg transition-colors duration-300 ${activeSection === link.href ? 'text-cyan-400' : 'text-white hover:text-cyan-400'}`}>{link.name}</a>
-                        ))}
-                    </nav>
-                    <div className="md:hidden">
-                        <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="text-white focus:outline-none">{isMenuOpen ? <X size={28} /> : <Menu size={28} />}</button>
-                    </div>
-                </div>
-            </header>
-
-            {/* --- Mobile Menu --- */}
-            {isMenuOpen && (
-                <div className="fixed inset-0 z-40 bg-[#0f172a] flex flex-col items-center justify-center md:hidden">
-                    <nav className="flex flex-col items-center space-y-8">
-                        {portfolioConfig.navLinks.map(link => (
-                            <a key={link.name} href={link.href} onClick={handleLinkClick} className={`text-2xl transition-colors duration-300 ${activeSection === link.href ? 'text-cyan-400' : 'text-white hover:text-cyan-400'}`}>{link.name}</a>
-                        ))}
-                    </nav>
-                </div>
-            )}
-
-            <main className="container mx-auto px-6">
-                {/* --- Hero Section --- */}
-                <section id="home" className="min-h-screen flex flex-col justify-center pt-24 md:pt-0">
-                    <div className="flex flex-col-reverse md:flex-row items-center justify-between w-full gap-8">
-                        <div className="md:w-3/5 text-center md:text-left">
-                            <h1 className="text-4xl md:text-6xl font-bold text-white leading-tight">Hi, I'm <br /><span className="text-cyan-400">{portfolioConfig.name}</span></h1>
-                            <h2 className="text-xl md:text-2xl text-gray-300 mt-4 h-8"><span className="text-cyan-300">{typedText}</span></h2>
-                            <p className="text-gray-300 mt-4 mb-8 max-w-xl mx-auto md:mx-0">{portfolioConfig.home.intro}</p>
-                            <div className="flex justify-center md:justify-start space-x-4 mb-8">
-                                <a href={portfolioConfig.githubUrl} target="_blank" rel="noopener noreferrer" className="p-3 bg-gray-700 rounded-full text-white hover:bg-cyan-500 transition-colors duration-300"><Github size={24} /></a>
-                                <a href={portfolioConfig.linkedinUrl} target="_blank" rel="noopener noreferrer" className="p-3 bg-gray-700 rounded-full text-white hover:bg-cyan-500 transition-colors duration-300"><Linkedin size={24} /></a>
-                                <a href={`mailto:${portfolioConfig.email}`} className="p-3 bg-gray-700 rounded-full text-white hover:bg-cyan-500 transition-colors duration-300"><Mail size={24} /></a>
-                            </div>
-                            <a href={portfolioConfig.cvUrl} download className="inline-flex items-center px-8 py-3 bg-cyan-500 text-black font-bold rounded-lg hover:bg-cyan-400 transition-colors duration-300">Download CV <ArrowRight className="ml-2" size={20} /></a>
-                        </div>
-                        <div className="md:w-2/5 flex justify-center">
-                            <div className="relative w-64 h-64 md:w-96 md:h-96">
-                                <div className="w-full h-full rounded-full bg-gray-800 border-4 border-cyan-400 overflow-hidden shadow-2xl shadow-cyan-500/20">
-                                    <img src={portfolioConfig.home.profileImageUrl} alt={portfolioConfig.name} className="w-full h-full object-cover" />
-                                </div>
-                                <div className="absolute top-5 -left-5 w-16 h-16 bg-[#1e293b] rounded-full flex items-center justify-center shadow-lg text-cyan-400"><Code size={32}/></div>
-                                <div className="absolute top-1/4 -right-8 w-16 h-16 bg-[#1e293b] rounded-full flex items-center justify-center shadow-lg text-cyan-400"><Database size={32}/></div>
-                                <div className="absolute bottom-10 -right-2 w-16 h-16 bg-[#1e293b] rounded-full flex items-center justify-center shadow-lg text-cyan-400"><ShieldCheck size={32}/></div>
-                                <div className="absolute bottom-0 -left-10 w-16 h-16 bg-[#1e293b] rounded-full flex items-center justify-center shadow-lg text-cyan-400"><Network size={32}/></div>
-                            </div>
-                        </div>
-                    </div>
-                     <div className="mt-16 md:mt-24 w-full">
-                        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 text-center">
-                            {portfolioConfig.home.quickStats.map(stat => (
-                                <div key={stat.label} className="bg-[#1e293b] p-4 rounded-lg flex flex-col sm:flex-row items-center justify-center gap-3 border border-gray-700">
-                                    <div className="text-cyan-400">{stat.icon}</div>
-                                    <div>
-                                        <h5 className="text-lg font-bold text-white">{stat.value}</h5>
-                                        <p className="text-sm text-gray-400">{stat.label}</p>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </section>
-
-                {/* --- About Section --- */}
-                <section id="about" className="py-24">
-                    <h2 className="text-4xl font-bold text-center text-white mb-4">About Me</h2>
-                    <div className="w-24 h-1 bg-cyan-400 mx-auto mb-12"></div>
-                    <div className="flex flex-col lg:flex-row items-center gap-12">
-                        <div className="lg:w-1/3 flex justify-center">
-                             <div className="w-60 h-60 md:w-80 md:h-80 rounded-lg bg-gray-800 overflow-hidden transform rotate-[-6deg] transition-transform duration-300 hover:rotate-0 hover:scale-105">
-                                 <img src={portfolioConfig.about.imageUrl} alt="About Me" className="w-full h-full object-cover" />
-                            </div>
-                        </div>
-                        <div className="lg:w-2/3 space-y-6">
-                            <div className="grid md:grid-cols-2 gap-6">
-                                <div className="bg-[#1e293b] p-6 rounded-lg border border-gray-700">
-                                    <h3 className="text-xl font-bold mb-3 text-cyan-400 flex items-center gap-2"><Building size={22}/> Who Am I</h3>
-                                    <p className="text-gray-300">{portfolioConfig.about.whoAmI}</p>
-                                </div>
-                                <div className="bg-[#1e293b] p-6 rounded-lg border border-gray-700">
-                                    <h3 className="text-xl font-bold mb-3 text-cyan-400 flex items-center gap-2"><Star size={22}/> My Passion</h3>
-                                    <p className="text-gray-300">{portfolioConfig.about.myPassion}</p>
-                                </div>
-                            </div>
-                             <div className="bg-[#1e293b] p-6 rounded-lg border border-gray-700">
-                                <h3 className="text-xl font-bold mb-4 text-cyan-400">Personal Info</h3>
-                                <div className="grid sm:grid-cols-2 gap-x-6 gap-y-3">
-                                    {portfolioConfig.about.personalInfo.map(info => (
-                                        <div key={info.text} className="flex items-center gap-3 text-gray-300">
-                                            <span className="text-cyan-400">{info.icon}</span>
-                                            <span>{info.text}</span>
-                                        </div>
-                                    ))}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                {/* --- Portfolio Section --- */}
-                <section id="portfolio" className="py-24">
-                    <h2 className="text-4xl font-bold text-center text-white mb-4">My Portfolio</h2>
-                    <div className="w-24 h-1 bg-cyan-400 mx-auto mb-12"></div>
-                    <div className="flex flex-wrap justify-center items-center gap-4 mb-12">
-                        {['projects', 'certificates', 'tech stack'].map(filter => (
-                            <button key={filter} onClick={() => setActivePortfolioFilter(filter)}
-                                    className={`px-5 py-2 rounded-lg font-semibold transition-colors capitalize text-lg ${activePortfolioFilter === filter ? 'bg-cyan-500 text-black' : 'bg-[#1e293b] text-white hover:bg-gray-700'}`}>
-                                {filter}
-                            </button>
-                        ))}
-                    </div>
-                    <div className="flex justify-center">
-                        {renderPortfolioContent()}
-                    </div>
-                </section>
-
-                {/* --- Testimonials Section --- */}
-                <section id="testimonials" className="py-24">
-                    <h2 className="text-4xl font-bold text-center text-white mb-4">Testimonials</h2>
-                    <div className="w-24 h-1 bg-cyan-400 mx-auto mb-12"></div>
-                    <div className="max-w-4xl mx-auto grid md:grid-cols-2 gap-8">
-                        {portfolioConfig.testimonials.map(testimonial => (
-                            <div key={testimonial.name} className="bg-[#1e293b] p-8 rounded-lg border border-gray-700">
-                                <p className="text-gray-300 italic mb-6">"{testimonial.quote}"</p>
-                                <div className="flex items-center gap-4">
-                                    <img src={testimonial.imageUrl} alt={testimonial.name} className="w-16 h-16 rounded-full border-2 border-cyan-400 object-cover"/>
-                                    <div>
-                                        <h4 className="font-bold text-lg text-white">{testimonial.name}</h4>
-                                        <p className="text-sm text-gray-400">{testimonial.role}</p>
-                                    </div>
-                                </div>
-                            </div>
-                        ))}
-                    </div>
-                </section>
-
-                {/* --- Contact Section --- */}
-                <section id="contact" className="py-24">
-                    <h2 className="text-4xl font-bold text-center text-white mb-4">Get In Touch</h2>
-                    <div className="w-24 h-1 bg-cyan-400 mx-auto mb-12"></div>
-                    <div className="w-full max-w-6xl mx-auto grid lg:grid-cols-2 gap-12">
-                        <div className="space-y-6">
-                            {portfolioConfig.contactLinks.map(link => (
-                                <a key={link.title} href={link.url} target="_blank" rel="noopener noreferrer" className="flex items-center p-5 bg-[#1e293b] rounded-lg border border-gray-700 hover:border-cyan-400 hover:-translate-y-1 transition-all duration-300">
-                                    <span className="text-cyan-400 mr-5">{React.cloneElement(link.icon, { size: 28 })}</span>
-                                    <div className="flex-grow">
-                                        <h3 className="text-lg font-bold text-white">{link.title}</h3>
-                                        <p className="text-gray-400">{link.subtitle}</p>
-                                    </div>
-                                    <ChevronRight className="text-gray-500" size={24}/>
-                                </a>
-                            ))}
-                        </div>
-                        <div className="bg-[#1e293b] p-8 rounded-lg border border-gray-700">
-                            <h3 className="text-2xl font-bold mb-6 flex items-center gap-3 text-white"><Send size={24} className="text-cyan-400"/> Send Me a Message</h3>
-                            <form action="#" className="space-y-5">
-                                <div>
-                                    <label htmlFor="name" className="text-gray-400 mb-2 block sr-only">Your Name</label>
-                                    <input type="text" id="name" placeholder="Your Name" className="w-full p-4 bg-[#0f172a] rounded-lg border border-gray-600 focus:border-cyan-400 focus:outline-none text-white transition-colors"/>
-                                </div>
-                                <div>
-                                    <label htmlFor="email" className="text-gray-400 mb-2 block sr-only">Your Email</label>
-                                    <input type="email" id="email" placeholder="Your Email" className="w-full p-4 bg-[#0f172a] rounded-lg border border-gray-600 focus:border-cyan-400 focus:outline-none text-white transition-colors"/>
-                                </div>
-                                <div>
-                                    <label htmlFor="message" className="text-gray-400 mb-2 block sr-only">Your Message</label>
-                                    <textarea id="message" placeholder="Your Message" rows="5" className="w-full p-4 bg-[#0f172a] rounded-lg border border-gray-600 focus:border-cyan-400 focus:outline-none text-white transition-colors"></textarea>
-                                </div>
-                                <div className="text-right">
-                                    <button type="submit" className="px-8 py-3 bg-cyan-500 text-black font-bold rounded-lg hover:bg-cyan-400 transition-colors duration-300">Send Message</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </section>
+        <>
+            <Header activeSection={activeSection} />
+            <main>
+                <HomeSection />
+                <AboutSection />
+                <PortfolioSection />
+                <TestimonialsSection />
+                <ContactSection onSupportClick={() => setIsModalOpen(true)} />
             </main>
-
-            {/* --- Footer --- */}
-            <footer className="border-t border-gray-800 mt-12">
-                <div className="container mx-auto px-6 py-6 text-center text-gray-500">
-                    <p>Copyright &copy; {new Date().getFullYear()} {portfolioConfig.name}. All Rights Reserved.</p>
-                </div>
-            </footer>
-        </div>
+            <Footer />
+            <BackToTopButton isVisible={isBackToTopVisible} />
+            <SupportModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+        </>
     );
 }
