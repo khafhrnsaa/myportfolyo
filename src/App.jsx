@@ -42,7 +42,7 @@ const portfolioItemsData = [
         category: 'projects',
         title: 'Kalkulator Zakat',
         description: 'Aplikasi kalkulator zakat berbasis web yang dibuat menggunakan HTML, CSS, dan JavaScript. Aplikasi ini membantu pengguna menghitung berbagai jenis zakat, seperti zakat penghasilan dan zakat maal, dengan antarmuka yang sederhana dan mudah digunakan.',
-        image: 'kalkulator zakat.png',
+        image: 'zakat.png',
         demoLink: 'https://github.com/airenmeyy/kalkulator-zakat',
         languages: ['JavaScript', 'HTML', 'CSS']
     },
