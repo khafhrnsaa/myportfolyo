@@ -25,7 +25,7 @@ const portfolioItemsData = [
         title: 'Warcoff',
         description: 'Warcoff adalah aplikasi web inovatif untuk warkop digital. Aplikasi ini mempermudah pengelolaan menu, pesanan, dan pembayaran dengan antarmuka yang minimalis dan intuitif, mengoptimalkan alur kerja, mengurangi kesalahan, dan meningkatkan efisiensi layanan.',
         image: 'warcoff.png',
-        demoLink: 'https://www.youtube.com/watch?v=your-youtube-video-id',
+        demoLink: 'https://github.com/airenmeyy/warcoff',
         languages: ['PHP', 'MySQL', 'JavaScript', 'HTML', 'CSS'] // Bahasa/teknologi yang digunakan
     },
     {
@@ -34,7 +34,7 @@ const portfolioItemsData = [
         title: 'SayurMart',
         description: 'Sistem manajemen inventaris berbasis web untuk toko sayuran. Aplikasi ini dirancang untuk mengelola stok, mencatat penjualan, dan memantau persediaan dengan efisien, membantu toko sayuran mengoptimalkan operasional dan mengurangi pemborosan.',
         image: 'sayurmart.png',
-        demoLink: '#',
+        demoLink: 'https://github.com/airenmeyy/sayurmart',
         languages: ['Python', 'Flask', 'SQLite', 'HTML', 'CSS'] // Bahasa/teknologi yang digunakan
     },
     {
@@ -42,7 +42,7 @@ const portfolioItemsData = [
         category: 'projects',
         title: 'Kalkulator Zakat',
         description: 'Aplikasi kalkulator zakat berbasis web yang dibuat menggunakan HTML, CSS, dan JavaScript. Aplikasi ini membantu pengguna menghitung berbagai jenis zakat, seperti zakat penghasilan dan zakat maal, dengan antarmuka yang sederhana dan mudah digunakan.',
-        image: 'https://placehold.co/600x400/221932/FFFFFF?text=Kalkulator+Zakat',
+        image: 'kalkulator zakat.png',
         demoLink: 'https://github.com/airenmeyy/kalkulator-zakat',
         languages: ['JavaScript', 'HTML', 'CSS']
     },
