@@ -38,13 +38,13 @@ const portfolioItemsData = [
         languages: ['Python', 'Flask', 'SQLite', 'HTML', 'CSS'] // Bahasa/teknologi yang digunakan
     },
     {
-        id: 19,
+        id: 22,
         category: 'projects',
-        title: 'Proyek Akan Datang',
-        description: 'Detail untuk proyek inovatif berikutnya akan segera diumumkan. Nantikan pembaruan selanjutnya untuk melihat hasil karya terbaru saya.',
-        image: 'https://placehold.co/600x400/221932/FFFFFF?text=Coming+Soon',
-        demoLink: '#',
-        languages: ['Segera Hadir']
+        title: 'Kalkulator Zakat',
+        description: 'Aplikasi kalkulator zakat berbasis web yang dibuat menggunakan HTML, CSS, dan JavaScript. Aplikasi ini membantu pengguna menghitung berbagai jenis zakat, seperti zakat penghasilan dan zakat maal, dengan antarmuka yang sederhana dan mudah digunakan.',
+        image: 'kalkulator zakat.png',
+        demoLink: 'https://github.com/airenmeyy/kalkulator-zakat',
+        languages: ['JavaScript', 'HTML', 'CSS']
     },
     // Trainings
     { id: 15, category: 'trainings', image: 'sertifikat p3h.png', title: 'Halal Product Process Assistance Training', link: '#' },
@@ -416,7 +416,7 @@ const Footer = () => (
         <p>Created by Kharisma Fahrun Nisa' | &copy; {new Date().getFullYear()} All Rights Reserved.</p>
         <div className="flex justify-center space-x-4 mt-4">
             <a href="https://linkedin.com/in/khafhrnsaa" target="_blank" rel="noopener noreferrer" className="w-8 h-8 border-2 border-accent rounded-full flex items-center justify-center text-accent hover:bg-accent hover:text-[#060407] transition-all duration-300"><Linkedin size={16}/></a>
-            <a href="https://github.com/khafhrnsaa" target="_blank" rel="noopener noreferrer" className="w-8 h-8 border-2 border-accent rounded-full flex items-center justify-center text-accent hover:bg-accent hover:text-[#060407] transition-all duration-300"><Github size={16}/></a>
+            <a href="https://github.com/airenmeyy" target="_blank" rel="noopener noreferrer" className="w-8 h-8 border-2 border-accent rounded-full flex items-center justify-center text-accent hover:bg-accent hover:text-[#060407] transition-all duration-300"><Github size={16}/></a>
         </div>
     </footer>
 );
