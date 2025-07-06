@@ -42,9 +42,18 @@ const portfolioItemsData = [
         category: 'projects',
         title: 'Kalkulator Zakat',
         description: 'Aplikasi kalkulator zakat berbasis web yang dibuat menggunakan HTML, CSS, dan JavaScript. Aplikasi ini membantu pengguna menghitung berbagai jenis zakat, seperti zakat penghasilan dan zakat maal, dengan antarmuka yang sederhana dan mudah digunakan.',
-        image: 'kalkulator zakat.png',
+        image: 'https://placehold.co/600x400/221932/FFFFFF?text=Kalkulator+Zakat',
         demoLink: 'https://github.com/airenmeyy/kalkulator-zakat',
         languages: ['JavaScript', 'HTML', 'CSS']
+    },
+    {
+        id: 24,
+        category: 'projects',
+        title: 'Wellnest App',
+        description: 'Wellnest adalah aplikasi berbasis web yang dirancang untuk mendukung kesehatan mental dengan menyediakan ruang aman dan anonim bagi pengguna untuk berbagi perasaan dan cerita mereka. Platform ini menghubungkan pengguna dengan pendengar sebaya yang menawarkan empati, membantu meringankan beban emosional dan menumbuhkan komunitas yang suportif.',
+        image: 'wellnest app.png',
+        demoLink: 'https://github.com/airenmeyy/wellnest-app',
+        languages: ['React', 'HTML', 'CSS']
     },
     // Trainings
     { id: 15, category: 'trainings', image: 'sertifikat p3h.png', title: 'Halal Product Process Assistance Training', link: '#' },
@@ -175,7 +184,7 @@ const HomeSection = () => {
                     </div>
                      <div className="stat-item bg-white text-[#060407] p-4 rounded-full flex items-center justify-center gap-3 shadow-lg">
                         <Paperclip size={30} className="text-accent"/>
-                        <div><h5 className="text-xl font-bold">3+ Projects</h5><p className="text-sm">Completed</p></div>
+                        <div><h5 className="text-xl font-bold">4+ Projects</h5><p className="text-sm">Completed</p></div>
                     </div>
                      <div className="stat-item bg-white text-[#060407] p-4 rounded-full flex items-center justify-center gap-3 shadow-lg">
                         <Award size={30} className="text-accent"/>
