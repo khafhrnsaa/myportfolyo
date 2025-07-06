@@ -35,7 +35,7 @@ const portfolioItemsData = [
         description: 'Sistem manajemen inventaris berbasis web untuk toko sayuran. Aplikasi ini dirancang untuk mengelola stok, mencatat penjualan, dan memantau persediaan dengan efisien, membantu toko sayuran mengoptimalkan operasional dan mengurangi pemborosan.',
         image: 'sayurmart.png',
         demoLink: 'https://github.com/airenmeyy/sayurmart',
-        languages: ['Python', 'Flask', 'SQLite', 'HTML', 'CSS'] // Bahasa/teknologi yang digunakan
+        languages: ['HTML5', 'JavaScript', 'CSS'] // Bahasa/teknologi yang digunakan
     },
     {
         id: 22,
@@ -44,7 +44,7 @@ const portfolioItemsData = [
         description: 'Aplikasi kalkulator zakat berbasis web yang dibuat menggunakan HTML, CSS, dan JavaScript. Aplikasi ini membantu pengguna menghitung berbagai jenis zakat, seperti zakat penghasilan dan zakat maal, dengan antarmuka yang sederhana dan mudah digunakan.',
         image: 'kalkulator zakat.png',
         demoLink: 'https://github.com/airenmeyy/kalkulator-zakat',
-        languages: ['JavaScript', 'HTML', 'CSS']
+        languages: ['JavaScript', 'HTML', 'Tailwind CSS']
     },
     {
         id: 24,
@@ -53,7 +53,7 @@ const portfolioItemsData = [
         description: 'Wellnest adalah aplikasi berbasis web yang dirancang untuk mendukung kesehatan mental dengan menyediakan ruang aman dan anonim bagi pengguna untuk berbagi perasaan dan cerita mereka. Platform ini menghubungkan pengguna dengan pendengar sebaya yang menawarkan empati, membantu meringankan beban emosional dan menumbuhkan komunitas yang suportif.',
         image: 'wellnest app.png',
         demoLink: 'https://github.com/airenmeyy/wellnest-app',
-        languages: ['React', 'HTML', 'CSS']
+        languages: ['React', 'HTML', 'Node.js']
     },
     // Trainings
     { id: 15, category: 'trainings', image: 'sertifikat p3h.png', title: 'Halal Product Process Assistance Training', link: '#' },
