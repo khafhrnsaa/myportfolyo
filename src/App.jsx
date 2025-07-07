@@ -52,7 +52,7 @@ const portfolioItemsData = [
         title: 'Wellnest App',
         description: 'Wellnest adalah aplikasi berbasis web yang dirancang untuk mendukung kesehatan mental dengan menyediakan ruang aman dan anonim bagi pengguna untuk berbagi perasaan dan cerita mereka. Platform ini menghubungkan pengguna dengan pendengar sebaya yang menawarkan empati, membantu meringankan beban emosional dan menumbuhkan komunitas yang suportif.',
         image: 'wellnest app.png',
-        demoLink: 'https://github.com/airenmeyy/wellnest-app',
+        demoLink: 'https://youtu.be/y7ICPdUQ474',
         languages: ['React', 'HTML', 'Node.js']
     },
     // Trainings
