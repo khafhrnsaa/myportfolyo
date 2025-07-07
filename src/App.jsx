@@ -197,37 +197,39 @@ const HomeSection = () => {
 };
 
 
-// --- Komponen About ---
+// --- Komponen About (UPDATED) ---
 const AboutSection = () => (
-    <section id="about" className="min-h-screen flex flex-col justify-center bg-[#221932] px-4 sm:px-8 md:px-16 lg:px-24 py-20">
-        <div className="text-center">
+    <section id="about" className="min-h-screen flex flex-col justify-center items-center bg-[#221932] px-4 sm:px-8 md:px-16 lg:px-24 py-20 overflow-hidden">
+        <div className="text-center mb-12 md:mb-16">
             <h2 className="text-4xl font-bold mb-2 text-white">About <span className="text-accent">Me</span></h2>
-            <p className="text-gray-300 mb-12">Discover my journey, passions, and the story behind my work</p>
+            <p className="text-gray-300">A little glimpse into my world!</p>
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start w-full">
-            <div className="flex justify-center">
-                <img src="profile.jpg" alt="About Kharisma" className="rounded-lg w-full max-w-sm h-auto object-cover" />
+
+        <div className="relative w-full max-w-5xl flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-0">
+            {/* Chibi Accessories - positioned relative to the main container */}
+            <img src="Zayne IV, Love and Deepspace.jpeg" alt="Chibi with stethoscope" className="hidden lg:block w-28 h-28 absolute -top-12 left-10 transform -rotate-[20deg] animate-float z-20" style={{animationDelay: '0.2s'}} />
+            <img src="download (21).jpeg" alt="Chibi reading a book" className="hidden lg:block w-32 h-32 absolute -bottom-16 right-1/4 transform rotate-[15deg] animate-float" style={{animationDelay: '0.5s'}} />
+            <img src="download (20).jpeg" alt="Smiling Chibi" className="hidden lg:block w-24 h-24 absolute top-1/2 -right-8 transform -translate-y-1/2 rotate-[25deg] animate-float" style={{animationDelay: '0.8s'}} />
+
+            {/* Main Photo with playful background */}
+            <div className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-[400px] lg:h-[400px] flex-shrink-0 about-reveal">
+                 <div className="absolute inset-0 bg-accent rounded-full transform -rotate-6 transition-transform group-hover:rotate-0"></div>
+                 <img src="profile.jpg" alt="About Kharisma" className="relative w-full h-full object-cover rounded-full border-8 border-[#221932] transform rotate-3 transition-transform group-hover:rotate-0" />
             </div>
-            <div className="space-y-8">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                    <div className="about-reveal bg-[#060407] p-6 rounded-lg">
-                        <h3 className="text-2xl font-bold mb-4 text-accent flex items-center gap-2"><Building size={24}/> Who Am I</h3>
-                        <p className="text-gray-300 leading-relaxed">I am a proactive and enthusiastic Information Technology student, driven by a deep passion for software development and cybersecurity.</p>
-                    </div>
-                    <div className="about-reveal bg-[#060407] p-6 rounded-lg">
-                        <h3 className="text-2xl font-bold mb-4 text-accent flex items-center gap-2"><Star size={24}/> My Passion</h3>
-                        <p className="text-gray-300 leading-relaxed">My approach combines a rigorous analytical mindset with hands-on technical skills to build efficient and secure digital solutions.</p>
-                    </div>
-                </div>
-                <div className="about-reveal bg-[#060407] p-6 rounded-lg">
-                    <h3 className="text-2xl font-bold mb-6 text-accent">Personal Info</h3>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4 text-white">
-                        <div className="flex items-center gap-3"><UserCircle className="text-accent"/><span>Kharisma Fahrun Nisa'</span></div>
-                        <div className="flex items-center gap-3"><Mail className="text-accent"/><span>gaharuearn@gmail.com</span></div>
-                        <div className="flex items-center gap-3"><Phone className="text-accent"/><span>+62 882-0075-03321</span></div>
-                        <div className="flex items-center gap-3"><GraduationCap className="text-accent"/><span>Sepuluh Nopember Institute of Technology</span></div>
-                        <div className="flex items-center gap-3 col-span-full"><Award className="text-accent"/><span>Awardee of PBSB Scholarship - LPDP RI</span></div>
-                    </div>
+
+            {/* Text Content Card */}
+            <div className="relative lg:-ml-20 bg-[#060407] p-8 rounded-2xl shadow-2xl max-w-lg z-10 about-reveal">
+                <h3 className="text-3xl font-bold mb-4 text-accent">Hello there! I'm Kharisma.</h3>
+                <p className="text-gray-300 leading-relaxed mb-4">
+                    I'm a proactive and enthusiastic Information Technology student, deeply passionate about the realms of <strong className="text-white">software development</strong> and <strong className="text-white">cybersecurity</strong>. I thrive on blending a sharp analytical mindset with practical technical skills to craft digital solutions that are not only efficient but also secure.
+                </p>
+                <div className="mt-6 border-t border-gray-700 pt-6">
+                     <h4 className="text-xl font-semibold mb-4 text-white">Quick Facts:</h4>
+                     <ul className="space-y-3 text-gray-300">
+                        <li className="flex items-start gap-3"><GraduationCap className="text-accent w-5 h-5 mt-1 flex-shrink-0"/><span>Student at Sepuluh Nopember Institute of Technology</span></li>
+                        <li className="flex items-start gap-3"><Award className="text-accent w-5 h-5 mt-1 flex-shrink-0"/><span>Awardee of PBSB Scholarship - LPDP RI</span></li>
+                        <li className="flex items-start gap-3"><Mail className="text-accent w-5 h-5 mt-1 flex-shrink-0"/><span>gaharuearn@gmail.com</span></li>
+                     </ul>
                 </div>
             </div>
         </div>
@@ -497,7 +499,7 @@ export default function App() {
             });
             sr.reveal('.home-content, .heading', { origin: 'top' });
             sr.reveal('.quick-stats-container, #testimonials, .contact-card, form', { origin: 'bottom', interval: 100 });
-            sr.reveal('.about-reveal', { origin: 'left', interval: 200 });
+            sr.reveal('.about-reveal', { origin: 'left', interval: 200, distance: '80px' });
             sr.reveal('.portfolio-item', { origin: 'bottom', interval: 100, cleanup: true });
         }
 
