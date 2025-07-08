@@ -207,9 +207,9 @@ const AboutSection = () => (
 
         <div className="relative w-full max-w-5xl flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-0">
             {/* Chibi Accessories - positioned relative to the main container */}
-            <img src="Zayne IV, Love and Deepspace.jpeg" alt="Chibi with stethoscope" className="hidden lg:block w-28 h-28 absolute -top-12 left-10 transform -rotate-[20deg] animate-float z-20" style={{animationDelay: '0.2s'}} />
-            <img src="download (21).jpeg" alt="Chibi reading a book" className="hidden lg:block w-32 h-32 absolute -bottom-16 right-1/4 transform rotate-[15deg] animate-float" style={{animationDelay: '0.5s'}} />
-            <img src="download (20).jpeg" alt="Smiling Chibi" className="hidden lg:block w-24 h-24 absolute top-1/2 -right-8 transform -translate-y-1/2 rotate-[25deg] animate-float" style={{animationDelay: '0.8s'}} />
+            <img src="zayne.png" alt="Chibi with stethoscope" className="hidden lg:block w-28 h-28 absolute -top-12 left-10 transform -rotate-[20deg] animate-float z-20" style={{animationDelay: '0.2s'}} />
+            <img src="zayne1.png" alt="Chibi reading a book" className="hidden lg:block w-32 h-32 absolute -bottom-16 right-1/4 transform rotate-[15deg] animate-float" style={{animationDelay: '0.5s'}} />
+            <img src="zayne2.png" alt="Smiling Chibi" className="hidden lg:block w-24 h-24 absolute top-1/2 -right-8 transform -translate-y-1/2 rotate-[25deg] animate-float" style={{animationDelay: '0.8s'}} />
 
             {/* Main Photo with playful background */}
             <div className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-[400px] lg:h-[400px] flex-shrink-0 about-reveal">
