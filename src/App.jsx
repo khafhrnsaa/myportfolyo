@@ -228,7 +228,7 @@ const AboutSection = () => (
                      <ul className="space-y-3 text-gray-300">
                         <li className="flex items-start gap-3"><GraduationCap className="text-accent w-5 h-5 mt-1 flex-shrink-0"/><span>Student at Sepuluh Nopember Institute of Technology</span></li>
                         <li className="flex items-start gap-3"><Award className="text-accent w-5 h-5 mt-1 flex-shrink-0"/><span>Awardee of PBSB Scholarship - LPDP RI</span></li>
-                        <li className="flex items-start gap-3"><Mail className="text-accent w-5 h-5 mt-1 flex-shrink-0"/><span>gaharuearn@gmail.com</span></li>
+                        <li className="flex items-start gap-3"><Mail className="text-accent w-5 h-5 mt-1 flex-shrink-0"/><span>khafhrnsaa@gmail.com</span></li>
                      </ul>
                 </div>
             </div>
@@ -391,7 +391,7 @@ const ContactSection = ({ onSupportClick }) => (
                     </div>
                     <ChevronRight className="text-white"/>
                 </a>
-                <a href="mailto:gaharuearn@gmail.com" className="contact-card bg-[#060407] p-6 rounded-lg flex items-center justify-between transition-transform hover:-translate-y-1">
+                <a href="mailto:khafhrnsaa@gmail.com" className="contact-card bg-[#060407] p-6 rounded-lg flex items-center justify-between transition-transform hover:-translate-y-1">
                     <div>
                         <h3 className="text-xl font-bold flex items-center gap-3 text-white"><Mail/> Email</h3>
                         <p className="text-gray-400">Send me an email directly</p>
