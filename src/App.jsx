@@ -41,7 +41,7 @@ const portfolioItemsData = [
         category: 'projects',
         title: 'Kalkulator Zakat',
         description: 'Aplikasi kalkulator zakat berbasis web yang dibuat menggunakan HTML, CSS, dan JavaScript. Aplikasi ini membantu pengguna menghitung berbagai jenis zakat, seperti zakat penghasilan dan zakat maal, dengan antarmuka yang sederhana dan mudah digunakan.',
-        image: 'https://placehold.co/600x400/221932/FFFFFF?text=Kalkulator+Zakat',
+        image: 'zakat.png',
         demoLink: 'https://github.com/airenmeyy/kalkulator-zakat',
         languages: ['JavaScript', 'HTML', 'CSS']
     },
@@ -50,7 +50,7 @@ const portfolioItemsData = [
         category: 'projects',
         title: 'Wellnest App',
         description: 'Wellnest adalah aplikasi berbasis web yang dirancang untuk mendukung kesehatan mental dengan menyediakan ruang aman dan anonim bagi pengguna untuk berbagi perasaan dan cerita mereka. Platform ini menghubungkan pengguna dengan pendengar sebaya yang menawarkan empati, membantu meringankan beban emosional dan menumbuhkan komunitas yang suportif.',
-        image: 'https://placehold.co/600x400/221932/FFFFFF?text=Wellnest+App',
+        image: 'wellnest app.png',
         demoLink: 'https://github.com/airenmeyy/wellnest-app',
         languages: ['JavaScript', 'HTML', 'CSS']
     },
@@ -631,3 +631,4 @@ export default function App() {
         </>
     );
 }
+
