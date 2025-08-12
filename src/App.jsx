@@ -7,7 +7,6 @@ import {
 } from 'lucide-react';
 
 // --- Data untuk Portfolio ---
-// Menambahkan properti 'languages' pada setiap item proyek
 const portfolioItemsData = [
     // Tech Stack
     { id: 1, category: 'tech', icon: <Code size={56} className="text-accent"/>, title: 'Python' },
@@ -25,8 +24,8 @@ const portfolioItemsData = [
         title: 'Warcoff',
         description: 'Warcoff adalah aplikasi web inovatif untuk warkop digital. Aplikasi ini mempermudah pengelolaan menu, pesanan, dan pembayaran dengan antarmuka yang minimalis dan intuitif, mengoptimalkan alur kerja, mengurangi kesalahan, dan meningkatkan efisiensi layanan.',
         image: 'warcoff.png',
-        demoLink: 'https://github.com/airenmeyy/warcoff',
-        languages: ['PHP', 'MySQL', 'JavaScript', 'HTML', 'CSS'] // Bahasa/teknologi yang digunakan
+        demoLink: 'https://www.youtube.com/watch?v=your-youtube-video-id',
+        languages: ['PHP', 'MySQL', 'JavaScript', 'HTML', 'CSS']
     },
     {
         id: 18,
@@ -34,31 +33,101 @@ const portfolioItemsData = [
         title: 'SayurMart',
         description: 'Sistem manajemen inventaris berbasis web untuk toko sayuran. Aplikasi ini dirancang untuk mengelola stok, mencatat penjualan, dan memantau persediaan dengan efisien, membantu toko sayuran mengoptimalkan operasional dan mengurangi pemborosan.',
         image: 'sayurmart.png',
-        demoLink: 'https://github.com/airenmeyy/sayurmart',
-        languages: ['HTML5', 'JavaScript', 'CSS'] // Bahasa/teknologi yang digunakan
+        demoLink: '#',
+        languages: ['Python', 'Flask', 'SQLite', 'HTML', 'CSS']
     },
     {
         id: 22,
         category: 'projects',
         title: 'Kalkulator Zakat',
         description: 'Aplikasi kalkulator zakat berbasis web yang dibuat menggunakan HTML, CSS, dan JavaScript. Aplikasi ini membantu pengguna menghitung berbagai jenis zakat, seperti zakat penghasilan dan zakat maal, dengan antarmuka yang sederhana dan mudah digunakan.',
-        image: 'kalkulator zakat.png',
+        image: 'https://placehold.co/600x400/221932/FFFFFF?text=Kalkulator+Zakat',
         demoLink: 'https://github.com/airenmeyy/kalkulator-zakat',
-        languages: ['JavaScript', 'HTML', 'Tailwind CSS']
+        languages: ['JavaScript', 'HTML', 'CSS']
     },
     {
         id: 24,
         category: 'projects',
         title: 'Wellnest App',
         description: 'Wellnest adalah aplikasi berbasis web yang dirancang untuk mendukung kesehatan mental dengan menyediakan ruang aman dan anonim bagi pengguna untuk berbagi perasaan dan cerita mereka. Platform ini menghubungkan pengguna dengan pendengar sebaya yang menawarkan empati, membantu meringankan beban emosional dan menumbuhkan komunitas yang suportif.',
-        image: 'wellnest app.png',
-        demoLink: 'https://youtu.be/y7ICPdUQ474',
-        languages: ['React', 'HTML', 'Node.js']
+        image: 'https://placehold.co/600x400/221932/FFFFFF?text=Wellnest+App',
+        demoLink: 'https://github.com/airenmeyy/wellnest-app',
+        languages: ['JavaScript', 'HTML', 'CSS']
     },
     // Trainings
     { id: 15, category: 'trainings', image: 'sertifikat p3h.png', title: 'Halal Product Process Assistance Training', link: '#' },
     { id: 16, category: 'trainings', image: 'sertifikat lkmm TD.png', title: 'LKMM-TD HMIT V', link: '#' },
 ];
+
+// --- Komponen Styling untuk Carousel ---
+const CarouselStyles = () => {
+    const projectCount = portfolioItemsData.filter(item => item.category === 'projects').length;
+    const cardWidth = 384; // Lebar kartu dalam piksel (w-96 di Tailwind)
+    const animationDuration = projectCount * 8; // Durasi animasi (detik), bisa disesuaikan
+
+    return (
+        <style>{`
+            /* Mendefinisikan animasi 'scroll' */
+            @keyframes scroll {
+              /* Awal animasi, posisi horizontal di 0 */
+              0% { transform: translateX(0); }
+              /* Akhir animasi, posisi digeser ke kiri sejauh total lebar dari item proyek asli */
+              100% { transform: translateX(calc(-${cardWidth}px * ${projectCount})); }
+            }
+
+            .slider {
+              margin: auto;
+              overflow: hidden; /* Menyembunyikan bagian dari slide-track yang berada di luar kontainer */
+              position: relative;
+              width: 100%;
+            }
+
+            /* Efek gradien di sisi kiri dan kanan untuk memberikan kesan 'fade' */
+            .slider::before,
+            .slider::after {
+              background: linear-gradient(to right, rgba(6,4,7,1) 0%, rgba(6,4,7,0) 100%);
+              content: "";
+              height: 100%;
+              position: absolute;
+              width: 10%;
+              z-index: 2;
+              top: 0;
+            }
+
+            .slider::before {
+              left: 0;
+            }
+
+            .slider::after {
+              right: 0;
+              transform: rotateZ(180deg);
+            }
+
+            /* Kontainer untuk semua slide, lebarnya adalah dua kali lipat dari total lebar proyek */
+            .slider .slide-track {
+              /* Menerapkan animasi 'scroll' dengan durasi yang dihitung, berjalan linear, dan berulang tanpa henti */
+              animation: scroll ${animationDuration}s linear infinite;
+              display: flex;
+              /* Lebar total adalah jumlah proyek dikali lebar kartu, lalu dikali 2 (karena diduplikasi) */
+              width: calc(${cardWidth}px * ${projectCount * 2});
+            }
+            
+            /* Menghentikan sementara animasi saat kursor mouse berada di atas slider */
+            .slider:hover .slide-track {
+                animation-play-state: paused;
+            }
+
+            .slider .slide {
+              width: ${cardWidth}px;
+              padding: 0 1rem; /* Jarak antar kartu */
+              flex-shrink: 0;
+              height: 100%;
+              box-sizing: border-box;
+            }
+        `}</style>
+    );
+};
+
 
 // --- Komponen Header ---
 const Header = ({ activeSection }) => {
@@ -197,39 +266,37 @@ const HomeSection = () => {
 };
 
 
-// --- Komponen About (UPDATED) ---
+// --- Komponen About ---
 const AboutSection = () => (
-    <section id="about" className="min-h-screen flex flex-col justify-center items-center bg-[#221932] px-4 sm:px-8 md:px-16 lg:px-24 py-20 overflow-hidden">
-        <div className="text-center mb-12 md:mb-16">
+    <section id="about" className="min-h-screen flex flex-col justify-center bg-[#221932] px-4 sm:px-8 md:px-16 lg:px-24 py-20">
+        <div className="text-center">
             <h2 className="text-4xl font-bold mb-2 text-white">About <span className="text-accent">Me</span></h2>
-            <p className="text-gray-300">A little glimpse into my world!</p>
+            <p className="text-gray-300 mb-12">Discover my journey, passions, and the story behind my work</p>
         </div>
-
-        <div className="relative w-full max-w-5xl flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-0">
-            {/* Chibi Accessories - positioned relative to the main container */}
-            <img src="zayne.png" alt="Chibi with stethoscope" className="hidden lg:block w-28 h-28 absolute -top-12 left-10 transform -rotate-[20deg] animate-float z-20" style={{animationDelay: '0.2s'}} />
-            <img src="zayne1.png" alt="Chibi reading a book" className="hidden lg:block w-32 h-32 absolute -bottom-16 right-1/4 transform rotate-[15deg] animate-float" style={{animationDelay: '0.5s'}} />
-            <img src="zayne2.png" alt="Smiling Chibi" className="hidden lg:block w-24 h-24 absolute top-1/2 -right-8 transform -translate-y-1/2 rotate-[25deg] animate-float" style={{animationDelay: '0.8s'}} />
-
-            {/* Main Photo with playful background */}
-            <div className="relative w-64 h-64 sm:w-80 sm:h-80 lg:w-[400px] lg:h-[400px] flex-shrink-0 about-reveal">
-                 <div className="absolute inset-0 bg-accent rounded-full transform -rotate-6 transition-transform group-hover:rotate-0"></div>
-                 <img src="profile.jpg" alt="About Kharisma" className="relative w-full h-full object-cover rounded-full border-8 border-[#221932] transform rotate-3 transition-transform group-hover:rotate-0" />
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start w-full">
+            <div className="flex justify-center">
+                <img src="profile.jpg" alt="About Kharisma" className="rounded-lg w-full max-w-sm h-auto object-cover" />
             </div>
-
-            {/* Text Content Card */}
-            <div className="relative lg:-ml-20 bg-[#060407] p-8 rounded-2xl shadow-2xl max-w-lg z-10 about-reveal">
-                <h3 className="text-3xl font-bold mb-4 text-accent">Hello there! I'm Kharisma.</h3>
-                <p className="text-gray-300 leading-relaxed mb-4">
-                    I'm a proactive and enthusiastic Information Technology student, deeply passionate about the realms of <strong className="text-white">software development</strong> and <strong className="text-white">cybersecurity</strong>. I thrive on blending a sharp analytical mindset with practical technical skills to craft digital solutions that are not only efficient but also secure.
-                </p>
-                <div className="mt-6 border-t border-gray-700 pt-6">
-                     <h4 className="text-xl font-semibold mb-4 text-white">Quick Facts:</h4>
-                     <ul className="space-y-3 text-gray-300">
-                        <li className="flex items-start gap-3"><GraduationCap className="text-accent w-5 h-5 mt-1 flex-shrink-0"/><span>Student at Sepuluh Nopember Institute of Technology</span></li>
-                        <li className="flex items-start gap-3"><Award className="text-accent w-5 h-5 mt-1 flex-shrink-0"/><span>Awardee of PBSB Scholarship - LPDP RI</span></li>
-                        <li className="flex items-start gap-3"><Mail className="text-accent w-5 h-5 mt-1 flex-shrink-0"/><span>khafhrnsaa@gmail.com</span></li>
-                     </ul>
+            <div className="space-y-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="about-reveal bg-[#060407] p-6 rounded-lg">
+                        <h3 className="text-2xl font-bold mb-4 text-accent flex items-center gap-2"><Building size={24}/> Who Am I</h3>
+                        <p className="text-gray-300 leading-relaxed">I am a proactive and enthusiastic Information Technology student, driven by a deep passion for software development and cybersecurity.</p>
+                    </div>
+                    <div className="about-reveal bg-[#060407] p-6 rounded-lg">
+                        <h3 className="text-2xl font-bold mb-4 text-accent flex items-center gap-2"><Star size={24}/> My Passion</h3>
+                        <p className="text-gray-300 leading-relaxed">My approach combines a rigorous analytical mindset with hands-on technical skills to build efficient and secure digital solutions.</p>
+                    </div>
+                </div>
+                <div className="about-reveal bg-[#060407] p-6 rounded-lg">
+                    <h3 className="text-2xl font-bold mb-6 text-accent">Personal Info</h3>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4 text-white">
+                        <div className="flex items-center gap-3"><UserCircle className="text-accent"/><span>Kharisma Fahrun Nisa'</span></div>
+                        <div className="flex items-center gap-3"><Mail className="text-accent"/><span>gaharuearn@gmail.com</span></div>
+                        <div className="flex items-center gap-3"><Phone className="text-accent"/><span>+62 882-0075-03321</span></div>
+                        <div className="flex items-center gap-3"><GraduationCap className="text-accent"/><span>Sepuluh Nopember Institute of Technology</span></div>
+                        <div className="flex items-center gap-3 col-span-full"><Award className="text-accent"/><span>Awardee of PBSB Scholarship - LPDP RI</span></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -243,6 +310,7 @@ const PortfolioSection = () => {
     const filters = ['projects', 'tech', 'trainings'];
 
     const filteredItems = portfolioItemsData.filter(item => item.category === activeFilter);
+    const projectItems = portfolioItemsData.filter(item => item.category === 'projects');
 
     return (
         <section id="portfolio" className="min-h-screen flex flex-col justify-center items-center px-4 sm:px-8 md:px-16 lg:px-24 py-20">
@@ -258,61 +326,79 @@ const PortfolioSection = () => {
                 ))}
             </div>
             
-            <div className="w-full max-w-6xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-                {filteredItems.map(item => (
-                    <div key={item.id} className="portfolio-item bg-[#221932] rounded-lg transition-transform hover:-translate-y-2"
-                         style={{ gridColumn: (item.category === 'projects' || item.category === 'trainings') ? 'span 2' : 'span 1' }}>
-                        {item.category === 'tech' ? (
-                            <div className="p-6 flex flex-col items-center justify-center space-y-3 h-full">
-                                {item.icon}
-                                <h3 className="font-semibold text-lg text-white">{item.title}</h3>
-                            </div>
-                        ) : item.category === 'projects' ? (
-                            <div className="overflow-hidden group h-full">
-                                <div className="relative h-full flex flex-col">
-                                    {item.image && (
-                                        <img src={item.image} alt={item.title} className="w-full h-48 object-cover transition-transform group-hover:scale-105"/>
-                                    )}
-                                    <div className="p-4 flex flex-col text-center flex-grow">
-                                        <h3 className="text-xl font-bold mb-2 text-white">{item.title}</h3>
-                                        <p className="text-gray-400 text-sm flex-grow mb-4 text-justify">{item.description}</p>
-                                        
-                                        {item.languages && (
-                                            <div className="mt-auto pt-4">
-                                                 <div className="flex flex-wrap justify-center gap-2 mb-4">
-                                                    {item.languages.map((lang, index) => (
-                                                        <span key={index} className="bg-[#060407] text-accent text-xs font-medium px-2.5 py-1 rounded-full border border-accent">
-                                                            {lang}
-                                                        </span>
-                                                    ))}
-                                                </div>
-                                            </div>
-                                        )}
+            {activeFilter === 'projects' && (
+                 <div className="slider w-full max-w-6xl py-4">
+                    <div className="slide-track">
+                        {/* Menduplikasi item proyek untuk menciptakan efek loop yang mulus.
+                          Saat set pertama berakhir, set kedua akan muncul, dan animasi akan di-reset
+                          tanpa ada jeda yang terlihat oleh pengguna.
+                        */}
+                        {[...projectItems, ...projectItems].map((item, index) => (
+                             <div key={`${item.id}-${index}`} className="slide">
+                                <div className="portfolio-item bg-[#221932] rounded-lg transition-transform hover:-translate-y-2 h-full">
+                                    <div className="overflow-hidden group h-full">
+                                        <div className="relative h-full flex flex-col">
+                                            {item.image && (
+                                                <img src={item.image} alt={item.title} className="w-full h-48 object-cover transition-transform group-hover:scale-105"/>
+                                            )}
+                                            <div className="p-4 flex flex-col text-center flex-grow">
+                                                <h3 className="text-xl font-bold mb-2 text-white">{item.title}</h3>
+                                                <p className="text-gray-400 text-sm flex-grow mb-4 text-justify">{item.description}</p>
+                                                
+                                                {item.languages && (
+                                                    <div className="mt-auto pt-4">
+                                                         <div className="flex flex-wrap justify-center gap-2 mb-4">
+                                                            {item.languages.map((lang, langIndex) => (
+                                                                <span key={langIndex} className="bg-[#060407] text-accent text-xs font-medium px-2.5 py-1 rounded-full border border-accent">
+                                                                    {lang}
+                                                                </span>
+                                                            ))}
+                                                        </div>
+                                                    </div>
+                                                )}
 
-                                        {item.demoLink && (
-                                            <a href={item.demoLink} target="_blank" rel="noopener noreferrer" className="btn inline-flex items-center justify-center gap-2 bg-accent text-[#060407] font-semibold px-4 py-2 rounded-lg hover:bg-accent-dark transition-colors mt-auto">
-                                                Demo <ChevronRight size={16}/>
-                                            </a>
-                                        )}
+                                                {item.demoLink && (
+                                                    <a href={item.demoLink} target="_blank" rel="noopener noreferrer" className="btn inline-flex items-center justify-center gap-2 bg-accent text-[#060407] font-semibold px-4 py-2 rounded-lg hover:bg-accent-dark transition-colors mt-auto">
+                                                        Demo <ChevronRight size={16}/>
+                                                    </a>
+                                                )}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        ) : ( // For 'trainings'
-                            <div className="overflow-hidden group h-full">
-                                <div className="relative h-full">
-                                    <img src={item.image} alt={item.title} className="w-full h-full object-cover transition-transform group-hover:scale-105"/>
-                                    <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity p-4 text-center">
-                                        <h4 className="text-white font-bold text-lg">{item.title}</h4>
-                                        <a href={item.link} target="_blank" rel="noopener noreferrer" className="mt-2 text-white text-lg border-2 border-accent bg-accent p-3 rounded-full">
-                                            <Paperclip size={20}/>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        )}
+                        ))}
                     </div>
-                ))}
-            </div>
+                </div>
+            )}
+
+            {(activeFilter === 'tech' || activeFilter === 'trainings') && (
+                <div className="w-full max-w-6xl grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+                    {filteredItems.map(item => (
+                        <div key={item.id} className="portfolio-item bg-[#221932] rounded-lg transition-transform hover:-translate-y-2"
+                             style={{ gridColumn: item.category === 'trainings' ? 'span 2' : 'span 1' }}>
+                            {item.category === 'tech' ? (
+                                <div className="p-6 flex flex-col items-center justify-center space-y-3 h-full">
+                                    {item.icon}
+                                    <h3 className="font-semibold text-lg text-white">{item.title}</h3>
+                                </div>
+                            ) : ( // For 'trainings'
+                                <div className="overflow-hidden group h-full">
+                                    <div className="relative h-full">
+                                        <img src={item.image} alt={item.title} className="w-full h-full object-cover transition-transform group-hover:scale-105"/>
+                                        <div className="absolute inset-0 bg-black bg-opacity-60 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity p-4 text-center">
+                                            <h4 className="text-white font-bold text-lg">{item.title}</h4>
+                                            <a href={item.link} target="_blank" rel="noopener noreferrer" className="mt-2 text-white text-lg border-2 border-accent bg-accent p-3 rounded-full">
+                                                <Paperclip size={20}/>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    ))}
+                </div>
+            )}
         </section>
     );
 };
@@ -391,7 +477,7 @@ const ContactSection = ({ onSupportClick }) => (
                     </div>
                     <ChevronRight className="text-white"/>
                 </a>
-                <a href="mailto:khafhrnsaa@gmail.com" className="contact-card bg-[#060407] p-6 rounded-lg flex items-center justify-between transition-transform hover:-translate-y-1">
+                <a href="mailto:gaharuearn@gmail.com" className="contact-card bg-[#060407] p-6 rounded-lg flex items-center justify-between transition-transform hover:-translate-y-1">
                     <div>
                         <h3 className="text-xl font-bold flex items-center gap-3 text-white"><Mail/> Email</h3>
                         <p className="text-gray-400">Send me an email directly</p>
@@ -499,7 +585,7 @@ export default function App() {
             });
             sr.reveal('.home-content, .heading', { origin: 'top' });
             sr.reveal('.quick-stats-container, #testimonials, .contact-card, form', { origin: 'bottom', interval: 100 });
-            sr.reveal('.about-reveal', { origin: 'left', interval: 200, distance: '80px' });
+            sr.reveal('.about-reveal', { origin: 'left', interval: 200 });
             sr.reveal('.portfolio-item', { origin: 'bottom', interval: 100, cleanup: true });
         }
 
@@ -530,6 +616,7 @@ export default function App() {
 
     return (
         <>
+            <CarouselStyles />
             <Header activeSection={activeSection} />
             <main>
                 <HomeSection />
