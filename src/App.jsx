@@ -157,7 +157,7 @@ const Header = ({ activeSection }) => {
 
     return (
         <header className="fixed top-0 left-0 w-full px-4 sm:px-8 md:px-16 py-4 flex justify-between items-center z-50 transition-shadow duration-300 bg-[#221932] shadow-lg">
-            <a href="#home" className="text-2xl font-bold text-white">Kharisma</a>
+            <a href="#home" className="text-2xl font-bold text-white"></a>
             {/* Desktop Nav */}
             <nav className="hidden md:flex space-x-2">
                 {navLinks.map(link => (
@@ -239,7 +239,7 @@ const HomeSection = () => {
                 </div>
                 <div className="flex justify-center items-center mt-8 md:mt-0">
                     <div className="relative w-3/4 md:w-full max-w-sm">
-                        <img src="https://placehold.co/400x400/221932/ffffff?text=Foto+Profil" alt="Profile" className="rounded-full border-8 border-accent w-full h-auto object-cover aspect-square animate-pulse" />
+                        <img src="profile.jpg" alt="Profile" className="rounded-full border-8 border-accent w-full h-auto object-cover aspect-square animate-pulse" />
                         <div className="absolute top-5 -left-5 w-16 h-16 bg-[#221932] rounded-full flex items-center justify-center shadow-lg animate-bounce" style={{animationDelay: '0.2s'}}>
                             <Code size={36} className="text-accent"/>
                         </div>
@@ -677,3 +677,4 @@ export default function App() {
         </>
     );
 }
+
