@@ -37,7 +37,7 @@ const portfolioItemsData = [
         category: 'projects',
         title: 'Warcoff',
         description: 'Warcoff adalah aplikasi web inovatif untuk warkop digital. Aplikasi ini mempermudah pengelolaan menu, pesanan, dan pembayaran dengan antarmuka yang minimalis dan intuitif, mengoptimalkan alur kerja, mengurangi kesalahan, dan meningkatkan efisiensi layanan.',
-        image: 'https://placehold.co/600x400/221932/ffffff?text=Warcoff',
+        image: 'warcoff.png',
         demoLink: '#',
         languages: ['PHP', 'MySQL', 'JavaScript', 'HTML', 'CSS']
     },
@@ -46,7 +46,7 @@ const portfolioItemsData = [
         category: 'projects',
         title: 'SayurMart',
         description: 'Sistem manajemen inventaris berbasis web untuk toko sayuran. Aplikasi ini dirancang untuk mengelola stok, mencatat penjualan, dan memantau persediaan dengan efisien, membantu toko sayuran mengoptimalkan operasional dan mengurangi pemborosan.',
-        image: 'https://placehold.co/600x400/221932/ffffff?text=SayurMart',
+        image: 'sayurmart.png',
         demoLink: '#',
         languages: ['Python', 'Flask', 'SQLite', 'HTML', 'CSS']
     },
@@ -55,7 +55,7 @@ const portfolioItemsData = [
         category: 'projects',
         title: 'Kalkulator Zakat',
         description: 'Aplikasi kalkulator zakat berbasis web yang dibuat menggunakan HTML, CSS, dan JavaScript. Aplikasi ini membantu pengguna menghitung berbagai jenis zakat, seperti zakat penghasilan dan zakat maal, dengan antarmuka yang sederhana dan mudah digunakan.',
-        image: 'https://placehold.co/600x400/221932/ffffff?text=Kalkulator+Zakat',
+        image: 'kalkulator zakat.png',
         demoLink: '#',
         languages: ['JavaScript', 'HTML', 'CSS']
     },
@@ -64,13 +64,13 @@ const portfolioItemsData = [
         category: 'projects',
         title: 'Wellnest App',
         description: 'Wellnest adalah aplikasi berbasis web yang dirancang untuk mendukung kesehatan mental dengan menyediakan ruang aman dan anonim bagi pengguna untuk berbagi perasaan dan cerita mereka. Platform ini menghubungkan pengguna dengan pendengar sebaya yang menawarkan empati, membantu meringankan beban emosional dan menumbuhkan komunitas yang suportif.',
-        image: 'https://placehold.co/600x400/221932/ffffff?text=Wellnest+App',
+        image: 'wellnest app.png',
         demoLink: '#',
         languages: ['JavaScript', 'HTML', 'CSS']
     },
     // Trainings
-    { id: 15, category: 'trainings', image: 'https://placehold.co/600x400/221932/ffffff?text=Sertifikat+P3H', title: 'Halal Product Process Assistance Training', link: '#' },
-    { id: 16, category: 'trainings', image: 'https://placehold.co/600x400/221932/ffffff?text=Sertifikat+LKMM+TD', title: 'LKMM-TD HMIT V', link: '#' },
+    { id: 15, category: 'trainings', image: 'sertifikat p3h.png', title: 'Halal Product Process Assistance Training', link: '#' },
+    { id: 16, category: 'trainings', image: 'sertifikat lkmm TD.png', title: 'LKMM-TD HMIT V', link: '#' },
 ];
 
 // --- Komponen Styling untuk Carousel ---
@@ -217,7 +217,7 @@ const HomeSection = () => {
                         <span ref={typedEl}></span>
                     </h3>
                     <p className="text-gray-300 max-w-lg mx-auto md:mx-0">
-                        A proactive and enthusiastic 4th-semester Information Technology student with a strong interest in software development and cybersecurity.
+                        A proactive and enthusiastic 5th-semester Information Technology student with a strong interest in software development and cybersecurity.
                     </p>
                     <div className="flex items-center justify-center md:justify-start space-x-4 pt-4">
                         <span className="font-semibold text-white">Follow me on:</span>
@@ -290,7 +290,7 @@ const AboutSection = () => (
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start w-full">
             <div className="flex justify-center">
-                <img src="https://placehold.co/400x450/060407/ffffff?text=Foto+Tentang+Saya" alt="About Kharisma" className="rounded-lg w-full max-w-sm h-auto object-cover" />
+                <img src="profile.jpg" alt="About Kharisma" className="rounded-lg w-full max-w-sm h-auto object-cover" />
             </div>
             <div className="space-y-8">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -557,9 +557,9 @@ const BackToTopButton = ({ isVisible }) => (
 
 const ChibiContainer = () => {
     const chibis = [
-        "http://googleusercontent.com/file_content/1",
-        "http://googleusercontent.com/file_content/2",
-        "http://googleusercontent.com/file_content/3",
+        "zayne.png",
+        "zayne1.png",
+        "zayne2.png",
     ];
 
     return (
