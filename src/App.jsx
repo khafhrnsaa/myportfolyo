@@ -23,7 +23,7 @@ const portfolioItemsData = [
         category: 'projects',
         title: 'Warcoff',
         description: 'Warcoff adalah aplikasi web inovatif untuk warkop digital. Aplikasi ini mempermudah pengelolaan menu, pesanan, dan pembayaran dengan antarmuka yang minimalis dan intuitif, mengoptimalkan alur kerja, mengurangi kesalahan, dan meningkatkan efisiensi layanan.',
-        image: 'warcoff.png',
+        image: '/warcoff.png',
         demoLink: 'https://www.youtube.com/watch?v=your-youtube-video-id',
         languages: ['PHP', 'MySQL', 'JavaScript', 'HTML', 'CSS']
     },
@@ -32,7 +32,7 @@ const portfolioItemsData = [
         category: 'projects',
         title: 'SayurMart',
         description: 'Sistem manajemen inventaris berbasis web untuk toko sayuran. Aplikasi ini dirancang untuk mengelola stok, mencatat penjualan, dan memantau persediaan dengan efisien, membantu toko sayuran mengoptimalkan operasional dan mengurangi pemborosan.',
-        image: 'sayurmart.png',
+        image: '/sayurmart.png',
         demoLink: '#',
         languages: ['Python', 'Flask', 'SQLite', 'HTML', 'CSS']
     },
@@ -41,7 +41,7 @@ const portfolioItemsData = [
         category: 'projects',
         title: 'Kalkulator Zakat',
         description: 'Aplikasi kalkulator zakat berbasis web yang dibuat menggunakan HTML, CSS, dan JavaScript. Aplikasi ini membantu pengguna menghitung berbagai jenis zakat, seperti zakat penghasilan dan zakat maal, dengan antarmuka yang sederhana dan mudah digunakan.',
-        image: 'https://placehold.co/600x400/221932/FFFFFF?text=Kalkulator+Zakat',
+        image: '/kalkulator zakat.png',
         demoLink: 'https://github.com/airenmeyy/kalkulator-zakat',
         languages: ['JavaScript', 'HTML', 'CSS']
     },
@@ -50,13 +50,13 @@ const portfolioItemsData = [
         category: 'projects',
         title: 'Wellnest App',
         description: 'Wellnest adalah aplikasi berbasis web yang dirancang untuk mendukung kesehatan mental dengan menyediakan ruang aman dan anonim bagi pengguna untuk berbagi perasaan dan cerita mereka. Platform ini menghubungkan pengguna dengan pendengar sebaya yang menawarkan empati, membantu meringankan beban emosional dan menumbuhkan komunitas yang suportif.',
-        image: 'https://placehold.co/600x400/221932/FFFFFF?text=Wellnest+App',
+        image: '/wellnest app.png',
         demoLink: 'https://github.com/airenmeyy/wellnest-app',
         languages: ['JavaScript', 'HTML', 'CSS']
     },
     // Trainings
-    { id: 15, category: 'trainings', image: 'sertifikat p3h.png', title: 'Halal Product Process Assistance Training', link: '#' },
-    { id: 16, category: 'trainings', image: 'sertifikat lkmm TD.png', title: 'LKMM-TD HMIT V', link: '#' },
+    { id: 15, category: 'trainings', image: '/sertifikat p3h.png', title: 'Halal Product Process Assistance Training', link: '#' },
+    { id: 16, category: 'trainings', image: '/sertifikat lkmm TD.png', title: 'LKMM-TD HMIT V', link: '#' },
 ];
 
 // --- Komponen Header ---
@@ -154,7 +154,7 @@ const HomeSection = () => {
                 </div>
                 <div className="flex justify-center items-center mt-8 md:mt-0">
                     <div className="relative w-3/4 md:w-full max-w-sm">
-                        <img src="profile.jpg" alt="Profile" className="rounded-full border-8 border-accent w-full h-auto object-cover aspect-square animate-float" fetchpriority="high" loading="eager" />
+                        <img src="/profile.jpg" alt="Profile" className="rounded-full border-8 border-accent w-full h-auto object-cover aspect-square animate-float" fetchpriority="high" loading="eager" />
                         <div className="floating-icon absolute top-5 -left-5 w-16 h-16 bg-[#221932] rounded-full flex items-center justify-center shadow-lg" style={{animationDelay: '0.2s'}}>
                             <Code size={36} style={{color: '#722548'}}/>
                         </div>
@@ -205,22 +205,32 @@ const AboutSection = () => (
         </div>
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center w-full">
             <div className="flex justify-center">
-                {/* Kontainer relatif untuk menampung gambar dan elemen chibi */}
+                {/* Kontainer relatif untuk menampung gambar utama dan gambar Zayne yang melayang */}
                 <div className="relative w-full max-w-sm">
-                    <img src="profile.jpg" alt="About Kharisma" className="rounded-lg w-full h-auto object-cover" />
-                    {/* Elemen Chibi yang diposisikan secara absolut di sekitar gambar */}
-                    <div className="chibi-float absolute -top-4 -left-4 w-14 h-14 bg-pink-300 rounded-full flex items-center justify-center text-gray-800 text-2xl shadow-lg border-2 border-white">
-                        🎨
-                    </div>
-                    <div className="chibi-float absolute -bottom-5 -right-5 w-16 h-16 bg-blue-300 rounded-full flex items-center justify-center text-gray-800 text-2xl shadow-lg border-2 border-white" style={{animationDelay: '0.5s'}}>
-                        💻
-                    </div>
-                    <div className="chibi-float absolute top-1/2 -right-8 w-12 h-12 bg-yellow-200 rounded-full flex items-center justify-center text-gray-800 text-2xl shadow-lg border-2 border-white" style={{animationDelay: '0.2s'}}>
-                        💡
-                    </div>
-                    <div className="chibi-float absolute bottom-1/4 -left-10 w-12 h-12 bg-green-300 rounded-full flex items-center justify-center text-gray-800 text-2xl shadow-lg border-2 border-white" style={{animationDelay: '0.8s'}}>
-                        🎮
-                    </div>
+                    <img src="/profile.jpg" alt="About Kharisma" className="rounded-lg w-full h-auto object-cover" />
+                    
+                    {/* Gambar Zayne 1 (kiri atas) */}
+                    <img 
+                        src="/zayne.png" 
+                        alt="Zayne" 
+                        className="chibi-float absolute -top-10 -left-8 w-24 h-24 object-contain drop-shadow-2xl" 
+                    />
+                    
+                    {/* Gambar Zayne 2 (kanan bawah) */}
+                    <img 
+                        src="/zayne1.png" 
+                        alt="Zayne 1" 
+                        className="chibi-float absolute -bottom-6 -right-8 w-28 h-28 object-contain drop-shadow-2xl" 
+                        style={{animationDelay: '0.5s'}} 
+                    />
+                    
+                    {/* Gambar Zayne 3 (kanan tengah) */}
+                    <img 
+                        src="/zayne2.png" 
+                        alt="Zayne 2" 
+                        className="chibi-float absolute top-1/3 -right-12 w-20 h-20 object-contain drop-shadow-2xl" 
+                        style={{animationDelay: '0.2s'}} 
+                    />
                 </div>
             </div>
             <div className="space-y-8">
@@ -456,7 +466,8 @@ const SupportModal = ({ isOpen, onClose }) => {
                 <h2 className="text-3xl font-bold mb-4 text-white">Support My Work</h2>
                 <p className="text-gray-300 mb-6">If you find my work valuable, consider supporting me. Thank you! 🙏</p>
                 <div className="bg-white p-4 rounded-lg">
-                    <img src="qris.png" alt="QRIS Code" className="w-full h-auto object-cover rounded-md"/>
+                    {/* Perubahan di sini: Menggunakan qris.jpeg */}
+                    <img src="/qris.jpeg" alt="QRIS Code" className="w-full h-auto object-cover rounded-md"/>
                 </div>
                 <p className="text-sm text-gray-400 mt-4">Scan the QR code with your mobile banking or e-wallet app.</p>
             </div>
