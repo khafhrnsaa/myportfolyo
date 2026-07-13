@@ -456,7 +456,7 @@ const SupportModal = ({ isOpen, onClose }) => {
                 <h2 className="text-3xl font-bold mb-4 text-white">Support My Work</h2>
                 <p className="text-gray-300 mb-6">If you find my work valuable, consider supporting me. Thank you! 🙏</p>
                 <div className="bg-white p-4 rounded-lg">
-                    <img src="WhatsApp Image 2026-07-13 at 9.04.55 PM.jpeg" alt="QRIS Code" className="w-full h-auto object-cover rounded-md"/>
+                    <img src="qris.jpeg" alt="QRIS Code" className="w-full h-auto object-cover rounded-md"/>
                 </div>
                 <p className="text-sm text-gray-400 mt-4">Scan the QR code with your mobile banking or e-wallet app.</p>
             </div>
