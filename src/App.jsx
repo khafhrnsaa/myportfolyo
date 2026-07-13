@@ -209,26 +209,26 @@ const AboutSection = () => (
                 <div className="relative w-full max-w-sm">
                     <img src="/profile.jpg" alt="About Kharisma" className="rounded-lg w-full h-auto object-cover" />
                     
-                    {/* Gambar Zayne 1 (kiri atas) */}
+                    {/* Gambar Zayne 1 (kiri atas) menggantikan emoji palet */}
                     <img 
                         src="/zayne.png" 
                         alt="Zayne" 
-                        className="chibi-float absolute -top-10 -left-8 w-24 h-24 object-contain drop-shadow-2xl" 
+                        className="chibi-float absolute -top-10 -left-10 w-24 h-24 object-contain drop-shadow-xl" 
                     />
                     
-                    {/* Gambar Zayne 2 (kanan bawah) */}
+                    {/* Gambar Zayne 2 (kiri bawah) menggantikan emoji gamepad */}
                     <img 
                         src="/zayne1.png" 
                         alt="Zayne 1" 
-                        className="chibi-float absolute -bottom-6 -right-8 w-28 h-28 object-contain drop-shadow-2xl" 
+                        className="chibi-float absolute -bottom-8 -left-8 w-24 h-24 object-contain drop-shadow-xl" 
                         style={{animationDelay: '0.5s'}} 
                     />
                     
-                    {/* Gambar Zayne 3 (kanan tengah) */}
+                    {/* Gambar Zayne 3 (kanan tengah) menggantikan emoji lampu */}
                     <img 
                         src="/zayne2.png" 
                         alt="Zayne 2" 
-                        className="chibi-float absolute top-1/3 -right-12 w-20 h-20 object-contain drop-shadow-2xl" 
+                        className="chibi-float absolute top-1/2 -right-12 w-20 h-20 object-contain drop-shadow-xl" 
                         style={{animationDelay: '0.2s'}} 
                     />
                 </div>
@@ -466,7 +466,7 @@ const SupportModal = ({ isOpen, onClose }) => {
                 <h2 className="text-3xl font-bold mb-4 text-white">Support My Work</h2>
                 <p className="text-gray-300 mb-6">If you find my work valuable, consider supporting me. Thank you! 🙏</p>
                 <div className="bg-white p-4 rounded-lg">
-                    {/* Perubahan di sini: Menggunakan qris.jpeg */}
+                    {/* Perubahan di sini: Menggunakan /qris.jpeg yang benar sesuai nama di GitHub */}
                     <img src="/qris.jpeg" alt="QRIS Code" className="w-full h-auto object-cover rounded-md"/>
                 </div>
                 <p className="text-sm text-gray-400 mt-4">Scan the QR code with your mobile banking or e-wallet app.</p>
