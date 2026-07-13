@@ -175,7 +175,7 @@ const HomeSection = () => {
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-center">
                     <div className="stat-item bg-white text-[#060407] p-4 rounded-full flex items-center justify-center gap-3 shadow-lg">
                         <Briefcase size={30} className="text-accent"/>
-                        <div><h5 className="text-xl font-bold">2+ Years</h5><p className="text-sm">Experience</p></div>
+                        <div><h5 className="text-xl font-bold">3+ Years</h5><p className="text-sm">Experience</p></div>
                     </div>
                      <div className="stat-item bg-white text-[#060407] p-4 rounded-full flex items-center justify-center gap-3 shadow-lg">
                         <Code size={30} className="text-accent"/>
@@ -183,7 +183,7 @@ const HomeSection = () => {
                     </div>
                      <div className="stat-item bg-white text-[#060407] p-4 rounded-full flex items-center justify-center gap-3 shadow-lg">
                         <Paperclip size={30} className="text-accent"/>
-                        <div><h5 className="text-xl font-bold">4+ Projects</h5><p className="text-sm">Completed</p></div>
+                        <div><h5 className="text-xl font-bold">23+ Projects</h5><p className="text-sm">Completed</p></div>
                     </div>
                      <div className="stat-item bg-white text-[#060407] p-4 rounded-full flex items-center justify-center gap-3 shadow-lg">
                         <Award size={30} className="text-accent"/>
@@ -411,7 +411,7 @@ const ContactSection = ({ onSupportClick }) => (
                     </div>
                     <ChevronRight className="text-white"/>
                 </a>
-                <a href="https://wa.me/62882007503321" target="_blank" rel="noopener noreferrer" className="contact-card bg-[#060407] p-6 rounded-lg flex items-center justify-between transition-transform hover:-translate-y-1">
+                <a href="https://wa.me/6281239362587" target="_blank" rel="noopener noreferrer" className="contact-card bg-[#060407] p-6 rounded-lg flex items-center justify-between transition-transform hover:-translate-y-1">
                     <div>
                         <h3 className="text-xl font-bold flex items-center gap-3 text-white"><MessageCircle/> WhatsApp</h3>
                         <p className="text-gray-400">Chat with me</p>
@@ -456,7 +456,7 @@ const SupportModal = ({ isOpen, onClose }) => {
                 <h2 className="text-3xl font-bold mb-4 text-white">Support My Work</h2>
                 <p className="text-gray-300 mb-6">If you find my work valuable, consider supporting me. Thank you! 🙏</p>
                 <div className="bg-white p-4 rounded-lg">
-                    <img src="https://placehold.co/300x300/ffffff/060407?text=Your+QRIS+Code+Here" alt="QRIS Code" className="w-full h-auto object-cover rounded-md"/>
+                    <img src="WhatsApp Image 2026-07-13 at 9.04.55 PM.jpeg" alt="QRIS Code" className="w-full h-auto object-cover rounded-md"/>
                 </div>
                 <p className="text-sm text-gray-400 mt-4">Scan the QR code with your mobile banking or e-wallet app.</p>
             </div>
