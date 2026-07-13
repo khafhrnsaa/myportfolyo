@@ -239,7 +239,7 @@ const AboutSection = () => (
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-4 text-white">
                         <div className="flex items-center gap-3"><UserCircle className="text-accent"/><span>Kharisma Fahrun Nisa'</span></div>
                         <div className="flex items-center gap-3"><Mail className="text-accent"/><span>gaharuearn@gmail.com</span></div>
-                        <div className="flex items-center gap-3"><Phone className="text-accent"/><span>+62 882-0075-03321</span></div>
+                        <div className="flex items-center gap-3"><Phone className="text-accent"/><span>+62 812-3936-2587</span></div>
                         <div className="flex items-center gap-3"><GraduationCap className="text-accent"/><span>Sepuluh Nopember Institute of Technology</span></div>
                         <div className="flex items-center gap-3 col-span-full"><Award className="text-accent"/><span>Awardee of PBSB Scholarship - LPDP RI</span></div>
                     </div>
@@ -456,7 +456,7 @@ const SupportModal = ({ isOpen, onClose }) => {
                 <h2 className="text-3xl font-bold mb-4 text-white">Support My Work</h2>
                 <p className="text-gray-300 mb-6">If you find my work valuable, consider supporting me. Thank you! 🙏</p>
                 <div className="bg-white p-4 rounded-lg">
-                    <img src="qris.jpeg" alt="QRIS Code" className="w-full h-auto object-cover rounded-md"/>
+                    <img src="qris.png" alt="QRIS Code" className="w-full h-auto object-cover rounded-md"/>
                 </div>
                 <p className="text-sm text-gray-400 mt-4">Scan the QR code with your mobile banking or e-wallet app.</p>
             </div>
