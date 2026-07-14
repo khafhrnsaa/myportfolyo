@@ -132,7 +132,7 @@ const HomeSection = () => {
                         <span ref={typedEl}></span>
                     </h3>
                     <p className="text-gray-300 max-w-lg mx-auto md:mx-0">
-                        A proactive and enthusiastic 4th-semester Information Technology student with a strong interest in software development and cybersecurity.
+                        A proactive and enthusiastic Information Technology student with a strong interest in software development and cybersecurity.
                     </p>
                     <div className="flex items-center justify-center md:justify-start space-x-4 pt-4">
                         <span className="font-semibold text-white">Follow me on:</span>
@@ -187,7 +187,7 @@ const HomeSection = () => {
                     </div>
                      <div className="stat-item bg-white text-[#060407] p-4 rounded-full flex items-center justify-center gap-3 shadow-lg">
                         <Award size={30} className="text-accent"/>
-                        <div><h5 className="text-xl font-bold">2.92 / 4.00</h5><p className="text-sm">GPA</p></div>
+                        <div><h5 className="text-xl font-bold">3.21 / 4.00</h5><p className="text-sm">GPA</p></div>
                     </div>
                 </div>
             </div>
@@ -250,7 +250,7 @@ const AboutSection = () => (
                         <div className="flex items-center gap-3"><UserCircle className="text-accent"/><span>Kharisma Fahrun Nisa'</span></div>
                         <div className="flex items-center gap-3"><Mail className="text-accent"/><span>gaharuearn@gmail.com</span></div>
                         <div className="flex items-center gap-3"><Phone className="text-accent"/><span>+62 812-3936-2587</span></div>
-                        <div className="flex items-center gap-3"><GraduationCap className="text-accent"/><span>Institut Teknologi Sepuluh Nopember</span></div>
+                        <div className="flex items-center gap-3"><GraduationCap className="text-accent"/><span>ITS</span></div>
                         <div className="flex items-center gap-3 col-span-full"><Award className="text-accent"/><span>Awardee of PBSB Scholarship - LPDP RI</span></div>
                     </div>
                 </div>
